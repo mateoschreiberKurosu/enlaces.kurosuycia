@@ -1,0 +1,9 @@
+- adx_name: Conceder cambio a contenido
+  adx_right: 1
+  adx_webpageaccesscontrolruleid: 2bd0ef7d-f6f5-4787-abd9-ae050fe935c8
+- adx_name: Conceder cambio a administradores
+  adx_right: 1
+  adx_webpageaccesscontrolrule_webrole:
+  - a98d1047-84d8-4a31-a854-6790bef72446
+  adx_webpageaccesscontrolruleid: a1573447-f54d-41f2-a7c1-ab18c417c4b9
+  adx_webpageid: 441e74c6-3352-410a-a649-6649a8d91ec7
