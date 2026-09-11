@@ -313,15 +313,9 @@
 .ks-videos-section { padding-top: 10px; }
 .ks-video-list {
   display: grid;
-  grid-auto-columns: minmax(280px, 86%);
-  grid-auto-flow: column;
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
-  margin-right: -20px;
-  padding: 2px 20px 18px 1px;
-  overflow-x: auto;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline mandatory;
-  scrollbar-width: thin;
+  padding: 2px 1px 18px;
 }
 
 .ks-video-card {
@@ -432,7 +426,6 @@
   .ks-home__container { padding-right: 28px; padding-left: 28px; }
   .ks-home-hero__profile { width: 148px; height: 148px; }
   .ks-action-card__copy small { display: block; }
-  .ks-video-list { margin-right: -28px; padding-right: 28px; }
 }
 
 @media (min-width: 720px) {
@@ -443,7 +436,7 @@
   .ks-action-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .ks-action-card { min-height: 98px; padding: 15px 17px; }
   .ks-action-card--priority { min-height: 104px; }
-  .ks-video-list { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-right: 0; padding-right: 1px; overflow: visible; }
+  .ks-video-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (min-width: 1024px) {

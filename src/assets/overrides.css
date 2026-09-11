@@ -1,4 +1,7 @@
 /* Static shell interactions and asset-path adjustments. */
+html { min-height: 100%; box-sizing: border-box; overflow-x: clip; background: var(--ks-bg); }
+*, *::before, *::after { box-sizing: inherit; }
+body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow-x: clip; }
 .skip-link { position: absolute; z-index: 1100; top: -64px; left: 16px; padding: 10px 14px; border-radius: 0 0 10px 10px; background: var(--ks-yellow); color: var(--ks-green-950); font-weight: 700; }
 .skip-link:focus { top: 0; color: var(--ks-green-950); outline: 3px solid var(--ks-green-950); outline-offset: 2px; }
 .ks-menu-button { display: block; width: 100%; min-height: 46px; padding: 13px 12px; border: 0; border-radius: 10px; background: transparent; color: var(--ks-text); font: inherit; font-size: 15px; font-weight: 650; line-height: 20px; text-align: left; }
@@ -11,8 +14,12 @@
 .ks-search-toggle .ks-icon { width: 19px; height: 19px; }
 .ks-header-search { position: absolute; z-index: 1060; top: calc(100% + 8px); right: 0; width: min(380px, calc(100vw - 24px)); padding: 14px; border: 1px solid var(--ks-border); border-radius: 14px; background: var(--ks-surface); box-shadow: var(--ks-shadow-md); }
 .ks-header-search[hidden] { display: none !important; }
-.ks-search-input { display: block; width: 100%; min-height: 46px; padding: 10px 13px; border: 1px solid var(--ks-border); border-radius: 10px; background: #fff; color: var(--ks-text); font: inherit; font-size: 16px; }
+.ks-header-search__group { display: flex; min-width: 0; align-items: stretch; }
+.ks-search-input { display: block; width: 100%; min-width: 0; min-height: 48px; padding: 10px 13px; border: 1px solid var(--ks-border); border-radius: 10px 0 0 10px; background: #fff; color: var(--ks-text); font: inherit; font-size: 16px; }
 .ks-search-input:focus { border-color: var(--ks-green-800); outline: 3px solid rgba(231, 181, 45, .55); outline-offset: 2px; }
+.ks-header-search__submit { display: inline-flex; width: 48px; min-width: 48px; min-height: 48px; align-items: center; justify-content: center; border: 1px solid var(--ks-green-800); border-radius: 0 10px 10px 0; background: var(--ks-green-800); color: #fff; }
+.ks-header-search__submit:hover, .ks-header-search__submit:focus { border-color: var(--ks-green-950); background: var(--ks-green-950); outline: 3px solid rgba(231, 181, 45, .8); outline-offset: 2px; }
+.ks-header-search__submit .ks-icon { width: 20px; height: 20px; }
 .ks-header-search__results:not(:empty) { max-height: min(52vh, 420px); margin-top: 10px; overflow-y: auto; }
 .ks-search-result { padding: 14px; border: 1px solid var(--ks-border); border-radius: 10px; background: var(--ks-surface); box-shadow: var(--ks-shadow-sm); }
 .ks-search-result + .ks-search-result { margin-top: 10px; }
@@ -27,8 +34,8 @@
 .ks-site-menu__cta > a, .ks-footer-contact, .ks-page__button { display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 8px; }
 .ks-site-menu__cta > a .ks-whatsapp-icon, .ks-footer-contact .ks-whatsapp-icon, .ks-page__button .ks-whatsapp-icon { display: block !important; width: 21px !important; height: 21px !important; margin: 0 !important; flex: 0 0 21px; line-height: 1; vertical-align: middle; }
 .ks-site-menu__cta > a > span, .ks-footer-contact > span, .ks-page__button > span { display: block; line-height: 21px; }
-.ks-site-footer__legal { text-align: center; }
-.ks-site-footer__legal p { margin: 0; }
+.ks-site-footer__legal { display: block !important; width: 100%; text-align: center; }
+.ks-site-footer__legal p { display: block; width: 100%; margin: 0; }
 .ks-site-footer__powered { display: inline-block; margin-left: 10px; white-space: nowrap; }
 .ks-site-footer__separator { margin-right: 10px; color: rgba(255, 255, 255, .62); }
 .ks-site-header .navbar-collapse.collapse { display: none; }
@@ -36,3 +43,4 @@
 @media (min-width: 1200px) { .ks-site-header .navbar-collapse.collapse { display: block !important; } }
 @media (min-width: 1200px) { .ks-menu-button { width: auto; padding: 14px 10px; } .ks-site-header .ks-site-menu__more { position: relative; } .ks-site-header .dropdown-menu.is-open { position: absolute; right: 0; left: auto; } }
 @media (max-width: 1199px) { .ks-site-menu__search { position: static; } .ks-header-search { position: static; width: auto; margin: 4px 12px 12px; box-shadow: none; } }
+@media (max-width: 399px) { .ks-site-footer__powered { margin-left: 0; } .ks-site-footer__separator { margin-left: 8px; } }

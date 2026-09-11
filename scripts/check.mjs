@@ -32,18 +32,25 @@ for (const file of html) {
 const home = await readFile(path.join(root, "index.html"), "utf8");
 if ((home.match(/data-ks-video data-video-id/g) || []).length !== 3) failures.push("index.html: faltan reproductores diferidos de YouTube");
 if (!home.includes("youtube-nocookie.com/embed/") || !home.includes("controls=1") || !home.includes("playsinline=1")) failures.push("index.html: configuracion de iframe YouTube incompleta");
-if (!/<link rel="icon" href="data:image\/png;base64,/.test(home) || home.includes("Logo-sm-64.png")) failures.push("index.html: favicon Kurosu invalido");
-if (!home.includes("id=\"searchToggle\"") || home.includes("ks-search-link")) failures.push("index.html: buscador del header invalido");
+const faviconMatch = home.match(/<link rel="icon" type="image\/svg\+xml" href="data:image\/svg\+xml;base64,([^\"]+)"/);
+const faviconSvg = faviconMatch ? Buffer.from(faviconMatch[1], "base64").toString("utf8") : "";
+if (!faviconMatch || !faviconSvg.includes('fill="#102f22"') || home.includes("Logo-sm-64.png")) failures.push("index.html: favicon Kurosu invalido");
+if (!home.includes("id=\"searchToggle\"") || !home.includes("ks-header-search__group") || !home.includes("ks-header-search__submit") || home.includes("ks-search-link")) failures.push("index.html: buscador del header invalido");
+if (!/body\s*\{[^}]*margin:\s*0/.test(home) || !home.includes("min-height: 100dvh") || !home.includes(".ks-site-footer__legal { display: block !important; width: 100%; text-align: center; }")) failures.push("index.html: viewport o pie no centrado");
+if (!home.includes(".ks-video-list {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr);") || home.includes("grid-auto-flow: column")) failures.push("index.html: carrusel movil no eliminado");
 if (!home.includes("Powered by: Kurosu &amp; Cía S.A.")) failures.push("index.html: pie institucional incompleto");
 for (const file of html.filter((file) => !file.endsWith("404.html"))) {
   const content = await readFile(file, "utf8");
   if (/href="(?:\.\/|\.\.\/)[^"]+\/$/.test(content)) failures.push(`${file}: enlace local apunta a carpeta`);
+  for (const anchor of content.match(/<a\b(?=[^>]*\bhref="(?:\.\/|\.\.\/)(?:index\.html|[^\"]+\/index\.html)")[^>]*>/gi) || []) {
+    if (/\btarget="_blank"/.test(anchor)) failures.push(`${file}: enlace interno abre una pestana nueva`);
+  }
 }
 const siteJs = await readFile(path.resolve("src/assets/site.js"), "utf8");
 if (siteJs.includes("innerHTML")) failures.push("site.js: renderizado HTML inseguro");
 if (!siteJs.includes('addEventListener("input"') || !siteJs.includes("contains(event.target)")) failures.push("site.js: interacciones de busqueda o menu incompletas");
 const headers = await readFile(path.join(root, "_headers"), "utf8");
-for (const header of ["Content-Security-Policy:", "Permissions-Policy:", "X-Content-Type-Options: nosniff", "X-Frame-Options: SAMEORIGIN", "Referrer-Policy: strict-origin-when-cross-origin", "frame-src https://www.youtube-nocookie.com"]) {
+for (const header of ["Content-Security-Policy:", "Permissions-Policy:", "X-Content-Type-Options: nosniff", "X-Frame-Options: SAMEORIGIN", "Referrer-Policy: strict-origin-when-cross-origin", "frame-src https://www.youtube-nocookie.com", "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com", "connect-src 'self' https://cloudflareinsights.com"]) {
   if (!headers.includes(header)) failures.push(`_headers: falta ${header}`);
 }
 const run = promisify(execFile);

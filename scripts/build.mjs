@@ -27,9 +27,7 @@ function localizeRootPaths(html, route) {
   let localized = html.replaceAll('="/', `="${prefix}`).replaceAll(`${prefix}assets/images/icons.svg#`, "#");
   localized = localized.replaceAll(`href="${prefix}"`, `href="${prefix}index.html"`);
   localized = localized.replace(/href="(\.\/|\.\.\/)([a-záéíóúñ0-9-]+)\/"/gi, 'href="$1$2/index.html"');
-  return localized.replace(/<a\b([^>]*\bhref="(?:\.\/|\.\.\/)(?:index\.html|[^"]+\/index\.html)"[^>]*)>/gi, function (_, attributes) {
-    return /\btarget=/.test(attributes) ? `<a${attributes}>` : `<a${attributes} target="_blank" rel="noopener noreferrer">`;
-  });
+  return localized;
 }
 function mimeType(file) {
   if (file.endsWith(".png")) return "image/png";
@@ -50,6 +48,7 @@ let styles = `${bootstrapCss}\n${globalCss}\n${homeCss}\n${overrides}\n`;
 for (const [name, uri] of Object.entries(fontUris)) styles = styles.replaceAll(`url("/${name}")`, `url("${uri}")`);
 const imageNames = ["kurosu-k-mark.png", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-careers.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
 const imageUris = Object.fromEntries(await Promise.all(imageNames.map(async (name) => [name, await dataUri(path.join(sourceAssets, name))])));
+const favicon = `data:image/svg+xml;base64,${Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#102f22"/><image href="${imageUris["kurosu-k-mark.png"]}" x="10" y="10" width="44" height="44" preserveAspectRatio="xMidYMid meet"/></svg>`).toString("base64")}`;
 for (const name of ["video-MuX-2vtmI8A.jpg", "video-PS-fCoKlDdk.jpg", "video-c1YK510VfYY.jpg"]) imageUris[name] = await dataUri(path.join(sourceImages, name));
 const iconSprite = await readFile(path.join(root, "src", "assets", "icons.svg"), "utf8");
 const appJs = await readFile(path.join(root, "src", "assets", "site.js"), "utf8");
@@ -57,13 +56,13 @@ const index = routes.filter(([route]) => route !== "404.html").map(([route, page
 for (const [route, page] of routes) {
   let html = layout(page);
   for (const [name, uri] of Object.entries(imageUris)) html = html.replaceAll(`/assets/images/${name}`, uri);
-  html = html.replaceAll('__INLINE_STYLES__', styles).replaceAll('__ICON_SPRITE__', iconSprite).replaceAll('__SEARCH_INDEX__', JSON.stringify(index)).replaceAll('__ROUTE_PREFIX__', route.includes("/") ? "../" : "./").replaceAll('__INLINE_APP_JS__', appJs);
+  html = html.replaceAll('__FAVICON__', favicon).replaceAll('__INLINE_STYLES__', styles).replaceAll('__ICON_SPRITE__', iconSprite).replaceAll('__SEARCH_INDEX__', JSON.stringify(index)).replaceAll('__ROUTE_PREFIX__', route.includes("/") ? "../" : "./").replaceAll('__INLINE_APP_JS__', appJs);
   await write(route, localizeRootPaths(html, route));
 }
 await write("robots.txt", "User-agent: *\nAllow: /\nSitemap: /sitemap.xml\n");
 const siteUrl = (process.env.PUBLIC_SITE_URL || "").replace(/\/$/, "");
 const sitemapUrls = siteUrl ? index.map(({ url }) => `<url><loc>${siteUrl}${url}</loc></url>`).join("") : "";
 await write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapUrls}</urlset>`);
-await write("_headers", "/*\n  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com\n  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n");
+await write("_headers", "/*\n  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com\n  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n");
 await write("_redirects", "/busqueda /busqueda/ 301\n/contacto /contacto/ 301\n/enlaces-de-productos /enlaces-de-productos/ 301\n/soporte-tecnico /soporte-tecnico/ 301\n/promociones /promociones/ 301\n/preguntas-frecuentes /preguntas-frecuentes/ 301\n/sobre-nosotros /sobre-nosotros/ 301\n/acceso-denegado /acceso-denegado/ 301\n");
 console.log(`Build complete: ${routes.length} pages in ${dist}`);
