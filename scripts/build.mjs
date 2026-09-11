@@ -48,7 +48,7 @@ const fontNames = ["poppins-400-latin.woff2", "poppins-500-latin.woff2", "poppin
 const fontUris = Object.fromEntries(await Promise.all(fontNames.map(async (name) => [name, await dataUri(path.join(sourceAssets, name))])));
 let styles = `${bootstrapCss}\n${globalCss}\n${homeCss}\n${overrides}\n`;
 for (const [name, uri] of Object.entries(fontUris)) styles = styles.replaceAll(`url("/${name}")`, `url("${uri}")`);
-const imageNames = ["Logo-sm-64.png", "kurosu-k-mark.png", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-careers.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
+const imageNames = ["kurosu-k-mark.png", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-careers.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
 const imageUris = Object.fromEntries(await Promise.all(imageNames.map(async (name) => [name, await dataUri(path.join(sourceAssets, name))])));
 for (const name of ["video-MuX-2vtmI8A.jpg", "video-PS-fCoKlDdk.jpg", "video-c1YK510VfYY.jpg"]) imageUris[name] = await dataUri(path.join(sourceImages, name));
 const iconSprite = await readFile(path.join(root, "src", "assets", "icons.svg"), "utf8");
@@ -57,13 +57,13 @@ const index = routes.filter(([route]) => route !== "404.html").map(([route, page
 for (const [route, page] of routes) {
   let html = layout(page);
   for (const [name, uri] of Object.entries(imageUris)) html = html.replaceAll(`/assets/images/${name}`, uri);
-  html = html.replaceAll('__INLINE_STYLES__', styles).replaceAll('__ICON_SPRITE__', iconSprite).replaceAll('__SEARCH_INDEX__', JSON.stringify(index)).replaceAll('__INLINE_APP_JS__', appJs);
+  html = html.replaceAll('__INLINE_STYLES__', styles).replaceAll('__ICON_SPRITE__', iconSprite).replaceAll('__SEARCH_INDEX__', JSON.stringify(index)).replaceAll('__ROUTE_PREFIX__', route.includes("/") ? "../" : "./").replaceAll('__INLINE_APP_JS__', appJs);
   await write(route, localizeRootPaths(html, route));
 }
 await write("robots.txt", "User-agent: *\nAllow: /\nSitemap: /sitemap.xml\n");
 const siteUrl = (process.env.PUBLIC_SITE_URL || "").replace(/\/$/, "");
 const sitemapUrls = siteUrl ? index.map(({ url }) => `<url><loc>${siteUrl}${url}</loc></url>`).join("") : "";
 await write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapUrls}</urlset>`);
-await write("_headers", "/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n");
+await write("_headers", "/*\n  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com\n  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n");
 await write("_redirects", "/busqueda /busqueda/ 301\n/contacto /contacto/ 301\n/enlaces-de-productos /enlaces-de-productos/ 301\n/soporte-tecnico /soporte-tecnico/ 301\n/promociones /promociones/ 301\n/preguntas-frecuentes /preguntas-frecuentes/ 301\n/sobre-nosotros /sobre-nosotros/ 301\n/acceso-denegado /acceso-denegado/ 301\n");
 console.log(`Build complete: ${routes.length} pages in ${dist}`);
