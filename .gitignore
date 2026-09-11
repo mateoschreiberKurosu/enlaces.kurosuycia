@@ -1,2 +1,4 @@
 .playwright-mcp/
 beacons-kurosuycia-mobile-full.png
+node_modules/
+.wrangler/
