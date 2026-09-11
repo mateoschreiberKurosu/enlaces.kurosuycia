@@ -1,0 +1,20 @@
+- adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 1
+  adx_displaypagechildlinks: false
+  adx_name: Sobre Nosotros
+  adx_openinnewwindow: false
+  adx_pageid: 9ade54ee-4b31-41c3-be69-cb81272e7b93
+  adx_robotsfollowlink: true
+  adx_weblinkid: 7e1f37e8-3dc5-4e02-af48-5656e22c7101
+  adx_weblinksetid: a9950f51-627f-4113-8bd8-59d0d118c6e3
+- adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 2
+  adx_displaypagechildlinks: false
+  adx_name: Preguntas Frecuentes
+  adx_openinnewwindow: false
+  adx_pageid: 0300fca5-1ae0-4738-82eb-138d22f25ce3
+  adx_robotsfollowlink: true
+  adx_weblinkid: e5a65054-465f-481b-b3a5-1c3c90548202
+  adx_weblinksetid: a9950f51-627f-4113-8bd8-59d0d118c6e3

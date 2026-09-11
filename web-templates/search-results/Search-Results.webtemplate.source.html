@@ -15,10 +15,11 @@
 {% assign page_size = 10 %}
 {% assign current_page = request.params.page | default: 1 %}
 {% searchindex query: request.params.q, page: request.params.page, page_size: page_size %}
+<section class='ks-search-results' aria-live='polite'>
 {% if searchindex.results.size > 0 %}
   <p class='result-count'>
     {% assign rc = snippets['Search/ResultsCount'] -%}
-    {%- if rc %}{{ rc | liquid }}{% else %}{{ current_page }} - {{ page_size }} of {{ searchindex.approximate_total_hits }} Results test{% endif %}
+    {%- if rc %}{{ rc | liquid }}{% else %}{{ current_page }} - {{ page_size }} de {{ searchindex.approximate_total_hits }} resultados{% endif %}
   </p>
   <ul class='search-results'>
     {% for result in searchindex.results %}
@@ -34,5 +35,6 @@
 {% else %}
   {{ snippets['Search/NoResults'] }}
 {% endif %}
+</section>
 {% endsearchindex %}
 {% endblock %}

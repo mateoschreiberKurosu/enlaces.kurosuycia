@@ -1,0 +1,44 @@
+- adx_description: Modelos y especificaciones oficiales.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 1
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://www.kurosu.com.py/page/es/tractores/
+  adx_name: Tractores
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 2da9ee31-5911-45da-8f0a-eec62fcd1e5f
+  adx_weblinksetid: 8d82cf5e-33cc-4d3c-bf72-514777fd4b66
+- adx_description: Información oficial de cosecha.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 2
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://www.kurosu.com.py/page/es/cosechadoras/
+  adx_name: Cosechadoras
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 10d2af0a-a6d7-41ce-85ac-2de1be43ab19
+  adx_weblinksetid: 8d82cf5e-33cc-4d3c-bf72-514777fd4b66
+- adx_description: Recursos oficiales de servicio Kurosu.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 3
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://www.kurosu.com.py/page/es/repuestos-servicio/servicio-especializado-y-de-optimizaci%C3%B3n/
+  adx_name: Servicio especializado
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 777cb9b7-9743-4ac7-9b34-a7c33ca36f23
+  adx_weblinksetid: 8d82cf5e-33cc-4d3c-bf72-514777fd4b66
+- adx_description: Soluciones oficiales de agricultura de precisión.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 4
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://www.kurosu.com.py/page/es/agricultura-de-precisi%C3%B3n/
+  adx_name: Agricultura de precisión
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 50678d87-3648-4e9f-a67f-3d2b0684cfb8
+  adx_weblinksetid: 8d82cf5e-33cc-4d3c-bf72-514777fd4b66

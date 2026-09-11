@@ -1,0 +1,99 @@
+- adx_description: Hablá ahora con nuestro centro de atención.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 1
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://wa.me/595986123000
+  adx_name: WhatsApp 24 hs
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: cf4a242f-631b-438c-a8f1-fa8e224106fc
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Recibí novedades y comunicaciones oficiales.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 2
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://whatsapp.com/channel/0029VbAWgm77z4kk4LJ1MZ1o
+  adx_name: Canal de WhatsApp
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 6ce4ea1f-6063-4032-ad94-7343af418953
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Encontrá información y recursos oficiales de Kurosu.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 3
+  adx_displaypagechildlinks: false
+  adx_name: Equipos y productos
+  adx_openinnewwindow: false
+  adx_pageid: 05c7526a-b93b-4ffd-ab4d-e6f2de8a8eac
+  adx_robotsfollowlink: true
+  adx_weblinkid: af5303e8-5a96-41af-aeff-e46bab08435d
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Accedé al canal de asistencia para tu maquinaria.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 4
+  adx_displaypagechildlinks: false
+  adx_name: Servicio técnico
+  adx_openinnewwindow: false
+  adx_pageid: ea5762f6-9a2f-439c-b4e9-5e2604daa85b
+  adx_robotsfollowlink: true
+  adx_weblinkid: 18234e87-a794-406f-9659-6758082a50c3
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Consultá las oportunidades publicadas en MachineFinder™.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 5
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://www.machinefinder.com/ww/es-PY/mf
+  adx_name: Equipos usados
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 21273138-16d8-411d-aca7-7954fe44ecf8
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Conocé las oportunidades y campañas vigentes.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 6
+  adx_displaypagechildlinks: false
+  adx_name: Promociones
+  adx_openinnewwindow: false
+  adx_pageid: 6bf0eb41-1f86-437e-9725-7cdb42ef5ef6
+  adx_robotsfollowlink: true
+  adx_weblinkid: 54ee9148-4d3b-417a-bd63-01fc01c84803
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Conocé las vacantes y postulá en línea.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 7
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://postulaciones.kurosu.com.py/
+  adx_name: Trabajá con nosotros
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 1a45ab01-acc5-41d7-b8eb-43a99070fd8e
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Dejanos tu consulta desde el portal.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 8
+  adx_displaypagechildlinks: false
+  adx_name: Contacto
+  adx_openinnewwindow: false
+  adx_pageid: ab7a7dab-79c2-42a4-80df-72329701462f
+  adx_robotsfollowlink: true
+  adx_weblinkid: 662ec7dc-6e12-4d20-bef7-07b800e895ce
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6
+- adx_description: Visitá el sitio institucional de Kurosu &amp; Cía.
+  adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 9
+  adx_displaypagechildlinks: false
+  adx_externalurl: https://www.kurosu.com.py/index.php/
+  adx_name: Sitio web oficial
+  adx_openinnewwindow: true
+  adx_robotsfollowlink: true
+  adx_weblinkid: 9a6e0cee-89ef-4e98-9ae5-30c401db6f7d
+  adx_weblinksetid: 2a0dbc35-1b78-4091-a331-2692f3c562f6

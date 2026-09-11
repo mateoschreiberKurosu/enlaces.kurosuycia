@@ -1,46 +1,55 @@
-<footer role='contentinfo' class='footer'>
-  <div class='footer-bottom hidden-print'>
-    <div class='container'>
-      <div class='row'>
-        <div class='col-md-9 col-sm-9 col-xs-9 text-left'>
-          {% editable snippets 'Footer' type: 'html' %}
-        </div>
-        <div id='accessibilityLinkContainer' class='col-md-3 col-sm-3 col-xs-3 text-right'></div>
+{% assign whatsapp_url = snippets['Kurosu/WhatsApp/URL'] | default: 'https://wa.me/595986123000' %}
+<footer role='contentinfo' class='footer ks-site-footer'>
+  <div class='ks-site-footer__main hidden-print'>
+    <div class='container ks-shell-container'>
+      <div class='ks-site-footer__grid'>
+        <a class='ks-site-brand ks-site-brand--footer' href='~/' aria-label='Kurosu &amp; Cía. - Inicio'>
+          <span class='ks-site-brand__mark'><img src='/kurosu-k-mark.png' alt='' width='22' height='22'></span>
+          <span class='ks-site-brand__name'>Kurosu <strong>&amp; Cía.</strong></span>
+        </a>
+        <nav class='ks-site-footer__actions' aria-label='Accesos finales'>
+          <a href='https://www.kurosu.com.py/index.php/' target='_blank' rel='noopener noreferrer'>Sitio oficial</a>
+          <a class='ks-footer-contact' href='{{ whatsapp_url | escape }}' target='_blank' rel='noopener noreferrer'><svg class='ks-whatsapp-icon' viewBox='0 0 448 512' aria-hidden='true'><use href='/kurosu-icons.svg#whatsapp'></use></svg><span>WhatsApp 24 hs</span></a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class='footer-bottom ks-site-footer__bottom hidden-print'>
+    <div class='container ks-shell-container'>
+      <div class='ks-site-footer__legal'>
+        <div>{% editable snippets 'Footer' type: 'html' %}</div>
+        <div id='accessibilityLinkContainer'></div>
       </div>
     </div>
   </div>
 </footer>
 
 <script type='text/javascript'>
-  window.onload = function () {
-    const accessibilityLinkContainer = document.getElementById('accessibilityLinkContainer');
-    switch (window.navigator.language) {
-      case 'fr':
-        if (accessibilityLinkContainer != null) {
-          const accessibilityText = 'Accessibilité : partiellement conforme';
-          const frenchAccessibilityAnchor = document.createElement('a');
-          frenchAccessibilityAnchor.id = 'frenchAccesssibleLink';
-          frenchAccessibilityAnchor.target = '_blank';
-          frenchAccessibilityAnchor.href = 'https://go.microsoft.com/fwlink/?linkid=2163806';
-          frenchAccessibilityAnchor.title = accessibilityText;
-          frenchAccessibilityAnchor.innerText = accessibilityText;
-          accessibilityLinkContainer.appendChild(frenchAccessibilityAnchor);
-        }
-        break;
-      case 'it':
-        if (accessibilityLinkContainer != null) {
-          const accessibilityText = 'Accessibilità: parzialmente conforme';
-          const italianAccessibilityAnchor = document.createElement('a');
-          italianAccessibilityAnchor.id = 'italianAccesssibleLink';
-          italianAccessibilityAnchor.target = '_blank';
-          italianAccessibilityAnchor.href = 'https://go.microsoft.com/fwlink/?linkid=2208177';
-          italianAccessibilityAnchor.title = accessibilityText;
-          italianAccessibilityAnchor.innerText = accessibilityText;
-          accessibilityLinkContainer.appendChild(italianAccessibilityAnchor);
-        }
-        break;
-      default:
-        accessibilityLinkContainer.remove();
+  window.addEventListener('load', function () {
+    const container = document.getElementById('accessibilityLinkContainer');
+    const language = window.navigator.language || '';
+    let text = '';
+    let url = '';
+
+    if (!container) return;
+
+    if (language.indexOf('fr') === 0) {
+      text = 'Accessibilité : partiellement conforme';
+      url = 'https://go.microsoft.com/fwlink/?linkid=2163806';
+    } else if (language.indexOf('it') === 0) {
+      text = 'Accessibilità: parzialmente conforme';
+      url = 'https://go.microsoft.com/fwlink/?linkid=2208177';
     }
-  };
+
+    if (text && url) {
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.href = url;
+      link.textContent = text;
+      container.appendChild(link);
+    } else {
+      container.remove();
+    }
+  });
 </script>

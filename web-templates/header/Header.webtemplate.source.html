@@ -1,31 +1,30 @@
 {% assign defaultlang = settings['LanguageLocale/Code'] | default: 'en-us' %}
 {% assign homeurl = website.adx_partialurl %}
-<div class='navbar navbar-inverse navbar-static-top' role='banner'>
+{% assign whatsapp_url = snippets['Kurosu/WhatsApp/URL'] | default: 'https://wa.me/595986123000' %}
+<link rel='stylesheet' href='/kurosu-ui.css'>
+<header class='navbar navbar-inverse navbar-static-top ks-site-header' role='banner'>
   <div class='skip-to-content'>
     <a href='#mainContent'>{{ resx.Skip_To_Content | default: 'Skip to main content' }}</a>
   </div>
-  <div class='container'>
+  <div class='container ks-shell-container'>
     <div class='navbar-header'>
-      <!--
-        div class="visible-xs-block">
-          {% editable snippets 'Mobile Header' type: 'html' %}
-        </div
-      -->
-      <div class='visible-sm-block visible-md-block visible-lg-block visible-xs-block navbar-brand'>
-        {% editable snippets 'Mobile Header' type: 'html' %}
-      </div>
-      <button type='button' class='navbar-toggle collapsed' title='{{ snippets["Header/Toggle Navigation"] | default: resx['Toggle_Navigation'] | h }}' data-toggle='collapse' data-target='#navbar' aria-expanded='false' onclick='setHeight();'>
+      <a class='navbar-brand ks-site-brand' href='~/' aria-label='Kurosu &amp; Cía. - Inicio'>
+        <span class='ks-site-brand__mark'><img src='/kurosu-k-mark.png' alt='' width='22' height='22'></span>
+        <span class='ks-site-brand__name'>Kurosu <strong>&amp; Cía.</strong></span>
+      </a>
+      <button type='button' class='navbar-toggle collapsed ks-site-menu-toggle' title='{{ snippets["Header/Toggle Navigation"] | default: resx['Toggle_Navigation'] | h }}' data-toggle='collapse' data-target='#navbar' aria-controls='navbar' aria-expanded='false' onclick='setHeight();'>
         <span class='sr-only'>{{ snippets['Header/Toggle Navigation'] | default: resx.Toggle_Navigation | h }}</span>
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
       </button>
     </div>
-    <div id='navbar' class='navbar-collapse collapse'>
-      {% assign primary_nav = weblinks.Default %}
+    <div id='navbar' class='navbar-collapse collapse ks-site-nav'>
+      {% assign primary_nav = weblinks['Kurosu Primary Navigation'] %}
+      {% assign secondary_nav = weblinks['Kurosu Secondary Navigation'] %}
       {% if primary_nav %}
-        <nav aria-label='{{ resx.Main_Navigation | default: "Main Navigation" }}' class='navbar-right menu-bar {% if primary_nav.editable %}xrm-entity xrm-editable-adx_weblinkset{% endif %}' data-weblinks-maxdepth='2'>
-          <ul class='nav navbar-nav weblinks'>
+        <nav aria-label='{{ resx.Main_Navigation | default: "Main Navigation" }}' class='navbar-right menu-bar ks-site-menu {% if primary_nav.editable %}xrm-entity xrm-editable-adx_weblinkset{% endif %}' data-weblinks-maxdepth='2'>
+          <ul class='nav navbar-nav weblinks ks-site-menu__links'>
             {% for link in primary_nav.weblinks %}
               {% unless forloop.first %}
                 <li class='divider-vertical' aria-hidden='true'></li>
@@ -48,8 +47,8 @@
                   {%- if link.Open_In_New_Window %}
                     target='_blank'
                   {% endif -%}
-                  {%- if link.nofollow %}
-                    rel='nofollow'
+                  {%- if link.Open_In_New_Window or link.nofollow %}
+                    rel='{% if link.Open_In_New_Window %}noopener noreferrer{% endif %}{% if link.Open_In_New_Window and link.nofollow %} {% endif %}{% if link.nofollow %}nofollow{% endif %}'
                   {% endif -%}
                   {%- if link.tooltip %}
                     title='{{ link.tooltip | escape }}'
@@ -91,8 +90,8 @@
                           {% if link.Open_In_New_Window %}
                             target='_blank'
                           {% endif %}
-                          {% if link.nofollow %}
-                            rel='nofollow'
+                          {% if link.Open_In_New_Window or link.nofollow %}
+                            rel='{% if link.Open_In_New_Window %}noopener noreferrer{% endif %}{% if link.Open_In_New_Window and link.nofollow %} {% endif %}{% if link.nofollow %}nofollow{% endif %}'
                           {% endif %}
                           {% if link.tooltip %}
                             title='{{ link.tooltip | escape }}'
@@ -112,8 +111,8 @@
                           {% if sublink.Open_In_New_Window %}
                             target='_blank'
                           {% endif %}
-                          {% if sublink.nofollow %}
-                            rel='nofollow'
+                          {% if sublink.Open_In_New_Window or sublink.nofollow %}
+                            rel='{% if sublink.Open_In_New_Window %}noopener noreferrer{% endif %}{% if sublink.Open_In_New_Window and sublink.nofollow %} {% endif %}{% if sublink.nofollow %}nofollow{% endif %}'
                           {% endif %}
                           {% if sublink.tooltip %}
                             title='{{ sublink.tooltip | escape }}'
@@ -127,6 +126,16 @@
                 {% endif %}
               </li>
             {% endfor %}
+            {% if secondary_nav and secondary_nav.weblinks.size > 0 %}
+            <li class='weblink dropdown ks-site-menu__more'>
+              <a href='#' role='button' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Más <span class='caret'></span></a>
+              <ul class='dropdown-menu'>
+                {% for link in secondary_nav.weblinks %}
+                    <li><a aria-label='{{ link.name | escape }}' aria-roledescription='link' href='{{ link.url | escape }}'{% if link.Open_In_New_Window %} target='_blank' rel='noopener noreferrer'{% elsif link.nofollow %} rel='nofollow'{% endif %}>{{ link.name | escape }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
             {% assign search_enabled = settings['Search/Enabled'] | boolean | default: true %}
             {% if search_enabled %}
               <li class='divider-vertical' aria-hidden='true'></li>
@@ -193,13 +202,16 @@
                 </li>
               {% endif %}
             {% endif %}
+            <li class='ks-site-menu__cta'>
+              <a href='{{ whatsapp_url | escape }}' target='_blank' rel='noopener noreferrer'><svg class='ks-whatsapp-icon' viewBox='0 0 448 512' aria-hidden='true'><use href='/kurosu-icons.svg#whatsapp'></use></svg><span>WhatsApp 24 hs</span></a>
+            </li>
           </ul>
           {% editable primary_nav %}
         </nav>
       {% endif %}
     </div>
   </div>
-</div>
+</header>
 {% substitution %}
 {% assign current_page = page.id %}
 {% assign sr_page = sitemarkers.Search.id %}

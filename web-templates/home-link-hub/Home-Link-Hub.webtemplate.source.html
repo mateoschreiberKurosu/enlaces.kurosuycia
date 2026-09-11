@@ -1,0 +1,121 @@
+{% assign action_links = weblinks['Home Actions'] %}
+{% assign social_links = weblinks['Home Social'] %}
+{% assign video_links = weblinks['Home Videos'] %}
+
+<main class='ks-home' aria-labelledby='ks-home-title'>
+  <section class='ks-home-hero'>
+    <picture class='ks-home-hero__media' aria-hidden='true'>
+      <source media='(min-width: 768px)' srcset='/kurosu-hub-background-desktop.png'>
+      <img src='/kurosu-hub-background-mobile.png' alt='' width='825' height='1466' fetchpriority='high'>
+    </picture>
+    <div class='ks-home-hero__shade' aria-hidden='true'></div>
+    <div class='ks-home__container ks-home-hero__content'>
+      <img class='ks-home-hero__profile' src='/kurosu-hub-profile.jpg' width='480' height='480' alt='Sede de Kurosu &amp; Cía.' fetchpriority='high'>
+      <p class='ks-home-hero__location'>
+        <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><path d='M12 21s7-6.1 7-12A7 7 0 105 9c0 5.9 7 12 7 12z'></path><circle cx='12' cy='9' r='2.2'></circle></svg>
+        {{ snippets['Home/Hub/Location'] | default: 'Paraguay' }}
+      </p>
+      <h1 id='ks-home-title'>{{ snippets['Home/Hub/Name'] | default: 'Kurosu &amp; Cía.' }}</h1>
+      <p class='ks-home-hero__tagline'>{{ snippets['Home/Hub/Tagline'] | default: 'Impulsando el progreso en Paraguay · Distribuidor John Deere' }}</p>
+
+      {% if social_links and social_links.weblinks.size > 0 %}
+        <nav class='ks-social' aria-label='Redes sociales de Kurosu &amp; Cía.'>
+          {% for social in social_links.weblinks %}
+            {% assign social_name = social.name | downcase %}
+            {% if social_name contains 'instagram' or social_name contains 'youtube' or social_name contains 'facebook' or social_name contains 'linkedin' %}
+            <a class='ks-social__link' href='{{ social.url | escape }}' aria-label='{{ social.name | escape }}' target='_blank' rel='noopener noreferrer'>
+              {% if social_name contains 'instagram' %}
+                <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='3' width='18' height='18' rx='5'></rect><circle cx='12' cy='12' r='4'></circle><circle class='ks-icon__fill' cx='17.5' cy='6.5' r='1'></circle></svg>
+              {% elsif social_name contains 'youtube' %}
+                <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><rect x='2.5' y='5' width='19' height='14' rx='4'></rect><path class='ks-icon__fill' d='M10 9l6 3-6 3z'></path></svg>
+              {% elsif social_name contains 'facebook' %}
+                <svg class='ks-icon ks-icon--fill' viewBox='0 0 24 24' aria-hidden='true'><path d='M14.5 8H18V4h-3.5C11 4 9 6.1 9 9.5V12H6v4h3v8h4v-8h3.4l.6-4h-4V9.7c0-1.1.4-1.7 1.5-1.7z'></path></svg>
+              {% elsif social_name contains 'linkedin' %}
+                <svg class='ks-icon ks-icon--fill' viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='9' width='4' height='12' rx='1'></rect><circle cx='5' cy='5' r='2'></circle><path d='M10 9h4v1.7c1-1.3 2.3-2 4-2 3 0 4 2 4 5.4V21h-4v-6.1c0-1.8-.6-2.8-2-2.8-1.4 0-2 1-2 3V21h-4z'></path></svg>
+              {% else %}<svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><path d='M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1'></path></svg>{% endif %}
+            </a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+        {% editable social_links %}
+      {% endif %}
+    </div>
+  </section>
+
+  <div class='ks-home__body'>
+    <section class='ks-home__container ks-actions-section' aria-labelledby='ks-actions-title'>
+      <div class='ks-section-title'>
+        <p class='ks-section-title__eyebrow'>Acceso directo</p>
+        <h2 id='ks-actions-title'>{{ snippets['Home/Hub/ActionsTitle'] | default: '¿Qué necesitás hoy?' }}</h2>
+      </div>
+
+      {% if action_links and action_links.weblinks.size > 0 %}
+        <nav class='ks-action-list' aria-label='Accesos principales'>
+          {% for link in action_links.weblinks %}
+            {% assign action_name = link.name | downcase %}
+            {% assign action_url = link.url | downcase %}
+            <a class='ks-action-card{% if forloop.index <= 2 %} ks-action-card--priority{% endif %}' href='{{ link.url | escape }}'{% if link.Open_In_New_Window %} target='_blank' rel='noopener noreferrer'{% endif %}>
+              <span class='ks-action-card__visual' aria-hidden='true'>
+                {% if action_name contains 'trabaj' %}
+                  <img src='/kurosu-hub-careers.jpg' alt='' width='600' height='600' loading='lazy'>
+                {% elsif action_url contains 'machinefinder' %}
+                  <img src='/kurosu-hub-machinefinder.jpg' alt='' width='600' height='600' loading='lazy'>
+                {% elsif action_name contains 'sitio web oficial' %}
+                  <img src='/kurosu-hub-official.jpg' alt='' width='600' height='600' loading='lazy'>
+                {% elsif action_url contains 'wa.me' or action_url contains 'whatsapp.com/channel' %}
+                  <svg class='ks-whatsapp-icon' viewBox='0 0 448 512' aria-hidden='true'><use href='/kurosu-icons.svg#whatsapp'></use></svg>
+                {% elsif action_name contains 'servicio' %}
+                  <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><path d='M14 6a5 5 0 01-6 6L3 17l4 4 5-5a5 5 0 006-6l-3 2-3-3 2-3z'></path></svg>
+                {% elsif action_name contains 'producto' %}
+                  <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='3' width='7' height='7' rx='1'></rect><rect x='14' y='3' width='7' height='7' rx='1'></rect><rect x='3' y='14' width='7' height='7' rx='1'></rect><rect x='14' y='14' width='7' height='7' rx='1'></rect></svg>
+                {% elsif action_name contains 'promocion' %}
+                  <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><path d='M3 12l9 9 9-9V3h-9L3 12z'></path><circle cx='16.5' cy='7.5' r='1.5'></circle></svg>
+                {% elsif action_name contains 'contacto' %}
+                  <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><rect x='3' y='5' width='18' height='14' rx='2'></rect><path d='M4 7l8 6 8-6'></path></svg>
+                {% else %}
+                  <svg class='ks-icon' viewBox='0 0 24 24' aria-hidden='true'><path d='M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1'></path></svg>
+                {% endif %}
+              </span>
+              <span class='ks-action-card__copy'>
+                <strong>{{ link.name | escape }}</strong>
+                {% if link.description %}<small>{{ link.description | escape }}</small>{% endif %}
+              </span>
+              <span class='ks-action-card__arrow' aria-hidden='true'>→</span>
+            </a>
+          {% endfor %}
+        </nav>
+        {% editable action_links %}
+      {% endif %}
+    </section>
+
+    {% if video_links and video_links.weblinks.size > 0 %}
+      <section class='ks-home__container ks-videos-section' aria-labelledby='ks-videos-title'>
+        <div class='ks-section-title ks-section-title--videos'>
+          <p class='ks-section-title__eyebrow'>Desde nuestro canal</p>
+          <h2 id='ks-videos-title'>{{ snippets['Home/Hub/VideosTitle'] | default: 'Historias y tecnología en acción' }}</h2>
+          <p>Reproducí cada video cuando quieras, sin demorar la carga inicial.</p>
+        </div>
+        <div class='ks-video-list'>
+          {% for video in video_links.weblinks %}
+            {% assign video_id = video.url | split: 'v=' | last | split: '&' | first %}
+            {% assign video_start = video.url | split: 't=' | last | split: '&' | first | remove: 's' %}
+            <article class='ks-video-card'>
+              <div class='ks-video-card__player' data-ks-video data-video-id='{{ video_id | escape }}' data-video-start='{{ video_start | escape }}' data-video-title='{{ video.name | escape }}'>
+                <a class='ks-video-card__poster' href='{{ video.url | escape }}' target='_blank' rel='noopener noreferrer' data-ks-video-trigger aria-label='Reproducir: {{ video.name | escape }}'>
+                  <img src='https://i.ytimg.com/vi/{{ video_id | escape }}/hqdefault.jpg' alt='' width='480' height='360' loading='lazy'>
+                  <span class='ks-video-card__play' aria-hidden='true'><svg class='ks-icon ks-icon--fill' viewBox='0 0 24 24'><path d='M8 5l11 7-11 7z'></path></svg></span>
+                </a>
+              </div>
+              <div class='ks-video-card__copy'>
+                <p class='ks-video-card__meta'>Kurosu &amp; Cía. · YouTube</p>
+                <h3>{{ video.name | escape }}</h3>
+                <a class='ks-video-card__fallback' href='{{ video.url | escape }}' target='_blank' rel='noopener noreferrer'>Abrir en YouTube</a>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+        {% editable video_links %}
+      </section>
+    {% endif %}
+  </div>
+</main>

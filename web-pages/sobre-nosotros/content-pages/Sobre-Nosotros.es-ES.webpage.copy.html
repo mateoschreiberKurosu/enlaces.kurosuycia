@@ -1,201 +1,23 @@
-<style>
-.sec-1 { background: #0a2a1a !important; }
-.sec-2 { background: #007a33 !important; }
-.sec-3 { background: #ff7f11 !important; }
-.sec-4 { background: #004aad !important; }
-.sec-5 { background: #d81159 !important; }
-.sec-6 { background: #00bcd4 !important; }
-.sec-7 { background: #ff5722 !important; }
-:root { --brand: #007a33; --brand-2: #004aad; --accent: #ff7f11; --brand-shadow: rgba(0, 122, 51, 0.6); }
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-* { font-family: 'Inter', sans-serif; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.anim-up { animation: fadeInUp 0.6s ease both; }
-.anim-fade { animation: fadeIn 0.8s ease both; }
-.btn-grad { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.btn-grad:hover { transform: translateY(-2px); box-shadow: 0 12px 28px var(--brand-shadow); }
-.card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; box-shadow: 0 8px 28px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.12); }
-.card-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 52px rgba(0,0,0,0.38), 0 4px 12px rgba(0,0,0,0.14); }
-</style>
-
-<div class="row sectionBlockLayout sec-1" data-component-theme="portalThemeColor1"
- style="display: flex; flex-wrap: wrap; min-height: 520px;
- background-image: url('https://cdn.hubblecontent.osi.office.net/m365content/publish/d716371a-eab1-48d6-a597-ce60a08e400e/thumbnails/xxlarge.jpg') !important;
- background-size: cover; background-position: center;">
- <div class="container" style="display: flex; flex-wrap: wrap; width: 100%;">
- <div class="col-md-12 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column;
- justify-content: center; align-items: center; text-align: center;
- padding: 80px 48px;
- background: linear-gradient(rgba(10,42,26,0.7), rgba(10,42,26,0.85));">
- <span style="font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #a5b4fc; font-weight: 600; display: block; margin-bottom: 16px;">Bienvenido a Kurosu Portal</span>
- <h1 class="anim-up" style="font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; color: #fff; margin-bottom: 20px;">Tu acceso directo a John Deere</h1>
- <p class="anim-up" style="font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 580px; line-height: 1.7; margin-bottom: 36px;">Conéctate con servicios, soporte y recursos exclusivos para clientes de Kurosu & Cía S.A., tu dealer oficial de maquinaria agrícola John Deere.</p>
- <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
- <button class="button1 btn-grad" style="background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; border: none; border-radius: 999px; padding: 14px 36px; font-weight: 700; font-size: 1rem; cursor: pointer;">Explorar Enlaces</button>
- <button class="button1" style="background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); border-radius: 999px; padding: 12px 32px; font-weight: 600; cursor: pointer;">Contáctanos</button>
- </div>
- </div>
- </div>
-</div>
-
-<div class="row sectionBlockLayout sec-2" data-component-theme="portalThemeColor2"
- style="display: flex; flex-wrap: wrap; min-height: auto;">
- <div class="container" style="display: flex; flex-wrap: wrap; width: 100%;">
- <div class="col-md-12 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column; padding: 64px 40px;">
- <div style="text-align: center; margin-bottom: 48px;">
- <span style="font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-weight: 600; display: block; margin-bottom: 10px;">Nuestra Historia</span>
- <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 12px;">Comprometidos con la agricultura desde 1995</h2>
- <p style="color: rgba(255,255,255,0.85); max-width: 520px; margin: 0 auto; line-height: 1.7;">Kurosu & Cía S.A. ha sido un dealer autorizado de John Deere, ofreciendo maquinaria agrícola de calidad y soporte técnico especializado para potenciar el trabajo de nuestros clientes en el campo.</p>
- </div>
- <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;">
- <div class="card-lift" style="background: rgba(255,255,255,0.70); border-radius: 20px; padding: 32px;">
- <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px;">🌱</div>
- <h3 style="font-size: 1.05rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">Calidad Garantizada</h3>
- <p style="color: #555; line-height: 1.65; margin: 0; font-size: 0.95rem;">Distribuimos maquinaria John Deere con garantía oficial y respaldo técnico certificado.</p>
- </div>
- <div class="card-lift" style="background: rgba(255,255,255,0.70); border-radius: 20px; padding: 32px;">
- <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px;">🔧</div>
- <h3 style="font-size: 1.05rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">Soporte Técnico</h3>
- <p style="color: #555; line-height: 1.65; margin: 0; font-size: 0.95rem;">Asistencia especializada para mantenimiento y reparación de equipos agrícolas.</p>
- </div>
- <div class="card-lift" style="background: rgba(255,255,255,0.70); border-radius: 20px; padding: 32px;">
- <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px;">📱</div>
- <h3 style="font-size: 1.05rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">Portal de Clientes</h3>
- <p style="color: #555; line-height: 1.65; margin: 0; font-size: 0.95rem;">Acceso fácil y rápido a enlaces útiles para gestionar tus servicios y productos.</p>
- </div>
- <div class="card-lift" style="background: rgba(255,255,255,0.70); border-radius: 20px; padding: 32px;">
- <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px;">🤝</div>
- <h3 style="font-size: 1.05rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px;">Relación de Confianza</h3>
- <p style="color: #555; line-height: 1.65; margin: 0; font-size: 0.95rem;">Construimos vínculos duraderos con nuestros clientes basados en la confianza y el compromiso.</p>
- </div>
- </div>
- </div>
- </div>
-</div>
-
-<div class="row sectionBlockLayout sec-3" data-component-theme="portalThemeColor3"
- style="display: flex; flex-wrap: wrap; min-height: auto;">
- <div class="container" style="display: flex; flex-wrap: wrap; width: 100%;">
- <div class="col-md-6 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 40px;">
- <span style="font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-weight: 600; display: block; margin-bottom: 10px;">Nuestra Misión</span>
- <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 16px;">Impulsar la productividad agrícola</h2>
- <p style="color: rgba(255,255,255,0.85); line-height: 1.7; padding: 8px 0;">Proveer maquinaria agrícola John Deere de última generación y servicios personalizados para que nuestros clientes maximicen su rendimiento y eficiencia en el campo.</p>
- <button class="button1 btn-grad" style="background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; border: none; border-radius: 999px; padding: 14px 36px; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 8px; align-self: flex-start;">Conoce Más</button>
- </div>
- <div class="col-md-6 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 40px;">
- <img style="width: 100%; height: auto; border-radius: 20px; box-shadow: 0 20px 56px rgba(0,0,0,0.13);" class="anim-fade" src="https://cdn.hubblecontent.osi.office.net/m365content/publish/a14fa010-96df-4e4b-9288-346b969b29ab/thumbnails/xxlarge.jpg" alt="Tractor trabajando en el campo">
- </div>
- </div>
-</div>
-
-<div class="row sectionBlockLayout sec-4" data-component-theme="portalThemeColor4"
- style="display: flex; flex-wrap: wrap; min-height: auto;">
- <div class="container" style="display: flex; flex-wrap: wrap; width: 100%;">
- <div class="col-md-12 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column; padding: 64px 40px;">
- <div style="text-align: center; margin-bottom: 48px;">
- <span style="font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-weight: 600; display: block; margin-bottom: 10px;">Testimonios</span>
- <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 12px;">Lo que dicen nuestros clientes</h2>
- <p style="color: rgba(255,255,255,0.85); max-width: 520px; margin: 0 auto; line-height: 1.7;">Experiencias reales de quienes confían en Kurosu & Cía S.A. para sus necesidades agrícolas.</p>
- </div>
- <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
- <div class="card-lift" style="background: rgba(255,255,255,0.12); border-radius: 20px; padding: 32px; border: 1px solid rgba(255,255,255,0.2);">
- <div style="color: rgba(255,255,255,0.9); font-size: 2.2rem; line-height: 1; margin-bottom: 16px;">❝</div>
- <p style="color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 24px; font-style: italic; font-size: 0.97rem;">"Gracias a Kurosu y John Deere, mi producción agrícola ha mejorado notablemente. El soporte técnico es excepcional y siempre están atentos a nuestras necesidades."</p>
- <div style="display: flex; align-items: center; gap: 12px;">
- <img style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;" src="https://cdn.hubblecontent.osi.office.net/m365content/publish/4ac4925a-65a6-4a3e-9761-7edf73386af6/thumbnails/xxlarge.jpg" alt="Juan Pérez">
- <div>
- <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">Juan Pérez</div>
- <div style="color: rgba(255,255,255,0.65); font-size: 0.8rem;">Productor Agrícola</div>
- </div>
- </div>
- </div>
- <div class="card-lift" style="background: rgba(255,255,255,0.12); border-radius: 20px; padding: 32px; border: 1px solid rgba(255,255,255,0.2);">
- <div style="color: rgba(255,255,255,0.9); font-size: 2.2rem; line-height: 1; margin-bottom: 16px;">❝</div>
- <p style="color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 24px; font-style: italic; font-size: 0.97rem;">"El portal de Kurosu facilita el acceso a manuales, repuestos y servicios. Es una herramienta indispensable para nuestra operación diaria."</p>
- <div style="display: flex; align-items: center; gap: 12px;">
- <img style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;" src="https://cdn.hubblecontent.osi.office.net/m365content/publish/9f54dfe2-3496-44fc-aebb-9d90a293b069/thumbnails/xxlarge.jpg" alt="María Gómez">
- <div>
- <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">María Gómez</div>
- <div style="color: rgba(255,255,255,0.65); font-size: 0.8rem;">Gerente de Operaciones</div>
- </div>
- </div>
- </div>
- <div class="card-lift" style="background: rgba(255,255,255,0.12); border-radius: 20px; padding: 32px; border: 1px solid rgba(255,255,255,0.2);">
- <div style="color: rgba(255,255,255,0.9); font-size: 2.2rem; line-height: 1; margin-bottom: 16px;">❝</div>
- <p style="color: rgba(255,255,255,0.88); line-height: 1.7; margin-bottom: 24px; font-style: italic; font-size: 0.97rem;">"La atención personalizada y la calidad de los equipos John Deere hacen que Kurosu sea nuestro aliado estratégico para el crecimiento agrícola."</p>
- <div style="display: flex; align-items: center; gap: 12px;">
- <img style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0;" src="https://cdn.hubblecontent.osi.office.net/m365content/publish/09f1db5c-c5ce-4979-9baf-f86d5de73461/thumbnails/xxlarge.jpg" alt="Carlos Martínez">
- <div>
- <div style="font-weight: 700; color: #fff; font-size: 0.9rem;">Carlos Martínez</div>
- <div style="color: rgba(255,255,255,0.65); font-size: 0.8rem;">Agricultor y Cliente</div>
- </div>
- </div>
- </div>
- </div>
- </div>
- </div>
-</div>
-
-<div class="row sectionBlockLayout sec-5" data-component-theme="portalThemeColor5"
- style="display: flex; flex-wrap: wrap; min-height: auto;">
- <div class="container" style="display: flex; flex-wrap: wrap; width: 100%;">
- <div class="col-md-6 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 40px;">
- <span style="font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.75); font-weight: 600; display: block; margin-bottom: 10px;">Nuestro Equipo</span>
- <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: #fff; margin-bottom: 24px;">Profesionales a tu servicio</h2>
- <div style="display: flex; flex-direction: column; gap: 16px;">
- <div style="display: flex; gap: 14px; align-items: flex-start;">
- <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">✓</div>
- <div>
- <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Asesoría Personalizada</div>
- <div style="color: rgba(255,255,255,0.8); font-size: 0.92rem; line-height: 1.6;">Expertos que entienden tus necesidades agrícolas y te guían en la mejor elección de maquinaria.</div>
- </div>
- </div>
- <div style="display: flex; gap: 14px; align-items: flex-start;">
- <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">✓</div>
- <div>
- <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Capacitación Continua</div>
- <div style="color: rgba(255,255,255,0.8); font-size: 0.92rem; line-height: 1.6;">Formación constante para ofrecer soporte técnico actualizado y eficiente.</div>
- </div>
- </div>
- <div style="display: flex; gap: 14px; align-items: flex-start;">
- <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">✓</div>
- <div>
- <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Compromiso y Responsabilidad</div>
- <div style="color: rgba(255,255,255,0.8); font-size: 0.92rem; line-height: 1.6;">Nos esforzamos por superar las expectativas y brindar soluciones efectivas.</div>
- </div>
- </div>
- <div style="display: flex; gap: 14px; align-items: flex-start;">
- <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;">✓</div>
- <div>
- <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Atención Cercana</div>
- <div style="color: rgba(255,255,255,0.8); font-size: 0.92rem; line-height: 1.6;">Estamos siempre disponibles para responder tus dudas y apoyarte en cada paso.</div>
- </div>
- </div>
- </div>
- </div>
- <div class="col-md-6 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 40px;">
- <img style="width: 100%; height: auto; border-radius: 20px; box-shadow: 0 20px 56px rgba(0,0,0,0.2);" class="anim-fade" src="https://cdn.hubblecontent.osi.office.net/m365content/publish/c77471b7-b8b4-4d9d-9bd3-9aa9dae9afea/thumbnails/xxlarge.jpg" alt="Equipo de profesionales agrícolas">
- </div>
- </div>
-</div>
-
-<div class="row sectionBlockLayout sec-6" data-component-theme="portalThemeColor6"
- style="display: flex; flex-wrap: wrap; min-height: auto;">
- <div class="container" style="display: flex; flex-wrap: wrap; width: 100%;">
- <div class="col-md-12 columnBlockLayout"
- style="flex-grow: 1; display: flex; flex-direction: column;
- align-items: center; text-align: center; padding: 72px 48px;">
- <h2 style="font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: #fff; margin-bottom: 16px;">¿Listo para potenciar tu campo?</h2>
- <p style="color: rgba(255,255,255,0.85); max-width: 500px; line-height: 1.7; margin-bottom: 36px; padding: 8px 0;">Accede a nuestro portal y descubre todos los recursos y servicios que Kurosu & Cía S.A. tiene para ti como cliente John Deere.</p>
- <button class="button1" style="background: rgba(255,255,255,0.5); color: var(--brand); border: none; border-radius: 999px; padding: 14px 40px; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">Acceder al Portal</button>
- </div>
- </div>
-</div>
+{% if website.adx_partialurl %}{% assign site_root = website.adx_partialurl | prepend: '/' %}{% else %}{% assign site_root = '' %}{% endif %}
+<section class="ks-page" aria-labelledby="about-title">
+  <div class="ks-page__container">
+    <section class="ks-page__hero" aria-labelledby="about-title">
+      <span class="ks-page__eyebrow">Kurosu &amp; Cía.</span>
+      <h1 id="about-title">Más de cinco décadas junto al desarrollo productivo del Paraguay</h1>
+      <p>Kurosu &amp; Cía. inició sus actividades en Encarnación en 1968 y, desde 1975, opera bajo su actual denominación. La información institucional se mantiene en su sitio oficial.</p>
+      <div class="ks-page__button-row">
+        <a class="ks-page__button" href="https://www.kurosu.com.py/index.php/content/about_us" target="_blank" rel="noopener noreferrer">Conocer la historia de Kurosu</a>
+        <a class="ks-page__button ks-page__button--light" href="https://www.kurosu.com.py/location" target="_blank" rel="noopener noreferrer">Ver ubicaciones</a>
+      </div>
+    </section>
+    <section class="ks-page__section" aria-labelledby="about-services-title">
+      <h2 id="about-services-title">Información útil para clientes</h2>
+      <div class="ks-page__grid ks-page__grid--two">
+        <a class="ks-page__action" href="{{ site_root }}/enlaces-de-productos/"><span class="ks-page__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg></span><span class="ks-page__action-copy"><h3>Equipos y soluciones</h3><p>Accedé a las categorías oficiales de productos de Kurosu.</p></span><span class="ks-page__arrow" aria-hidden="true">→</span></a>
+        <a class="ks-page__action" href="{{ site_root }}/soporte-técnico/"><span class="ks-page__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m14 6 4 4-8 8H6v-4zM13 7l4 4"/></svg></span><span class="ks-page__action-copy"><h3>Servicio y asistencia</h3><p>Encontrá soporte técnico y recursos oficiales.</p></span><span class="ks-page__arrow" aria-hidden="true">→</span></a>
+        <a class="ks-page__action" href="https://www.kurosu.com.py/location" target="_blank" rel="noopener noreferrer"><span class="ks-page__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-12A7 7 0 105 9c0 5.9 7 12 7 12z"/><circle cx="12" cy="9" r="2.2"/></svg></span><span class="ks-page__action-copy"><h3>Sucursales y horarios</h3><p>Consultá ubicaciones, teléfonos y horarios de atención.</p></span><span class="ks-page__arrow" aria-hidden="true">→</span></a>
+        <a class="ks-page__action" href="{{ site_root }}/contacto/"><span class="ks-page__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 7l8 6 8-6"/></svg></span><span class="ks-page__action-copy"><h3>Contacto directo</h3><p>Elegí el canal que mejor se adapte a tu consulta.</p></span><span class="ks-page__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </div>
+</section>

@@ -4,7 +4,7 @@
 
 {% assign search_filters = settings['search/filters'] | search_filter_options %}
 
-<form method="GET" action="{{ search_page.url | h }}" role="search" class="form-search">
+<form method="GET" action="{{ search_page.url | h }}" role="search" class="form-search ks-search-form">
     <div class="input-group" style="display:table;">
 
         {% if search_filters %}
@@ -51,10 +51,10 @@
                value="{{ params.q | escape }}"
                title="{{ snippets["Header/Search/Label"] | default: resx["Search_DefaultText"] | h }}">
         <div class="input-group-btn">
-            <button type="submit" class="btn btn-primary"
+            <button type="submit" class="btn btn-primary ks-search-submit"
                     title="{{ snippets["Header/Search/ToolTip"] | default: resx["Search_DefaultText"] | h }}"
                     aria-label="{{ snippets["Header/Search/ToolTip"] | default: resx["Search_DefaultText"] | h }}">
-                <span class="fa fa-search" aria-hidden="true"></span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path></svg>
             </button>
         </div>
     </div>
