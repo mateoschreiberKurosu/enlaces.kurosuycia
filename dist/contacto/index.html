@@ -9552,7 +9552,9 @@ body {
 /* Static shell interactions and asset-path adjustments. */
 html { min-height: 100%; box-sizing: border-box; overflow-x: clip; background: var(--ks-bg); }
 *, *::before, *::after { box-sizing: inherit; }
-body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow-x: clip; }
+body { display: flex; min-width: 0; min-height: 100dvh; flex-direction: column; margin: 0; overflow-x: hidden; overflow-x: clip; }
+body > main { flex: 1 0 auto; }
+.ks-site-footer { flex: 0 0 auto; }
 .skip-link { position: absolute; z-index: 1100; top: -64px; left: 16px; padding: 10px 14px; border-radius: 0 0 10px 10px; background: var(--ks-yellow); color: var(--ks-green-950); font-weight: 700; }
 .skip-link:focus { top: 0; color: var(--ks-green-950); outline: 3px solid var(--ks-green-950); outline-offset: 2px; }
 .ks-menu-button { display: block; width: 100%; min-height: 46px; padding: 13px 12px; border: 0; border-radius: 10px; background: transparent; color: var(--ks-text); font: inherit; font-size: 15px; font-weight: 650; line-height: 20px; text-align: left; }
@@ -9560,6 +9562,7 @@ body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow
 .ks-site-header .dropdown-menu { display: none; }
 .ks-site-header .dropdown-menu.is-open { display: block; }
 .ks-site-menu__search { position: relative; }
+.ks-site-menu__search.is-search-open .ks-search-toggle { display: none; }
 .ks-search-toggle { display: inline-flex; align-items: center; justify-content: center; width: 48px; min-height: 48px; padding: 0; border: 0; border-radius: 12px; background: transparent; color: var(--ks-green-950); }
 .ks-search-toggle:hover, .ks-search-toggle:focus { background: #edf5ef; color: var(--ks-green-800); outline: 3px solid rgba(231, 181, 45, .8); outline-offset: 2px; }
 .ks-search-toggle .ks-icon { width: 19px; height: 19px; }
@@ -9585,8 +9588,9 @@ body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow
 .ks-site-menu__cta > a, .ks-footer-contact, .ks-page__button { display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 8px; }
 .ks-site-menu__cta > a .ks-whatsapp-icon, .ks-footer-contact .ks-whatsapp-icon, .ks-page__button .ks-whatsapp-icon { display: block !important; width: 21px !important; height: 21px !important; margin: 0 !important; flex: 0 0 21px; line-height: 1; vertical-align: middle; }
 .ks-site-menu__cta > a > span, .ks-footer-contact > span, .ks-page__button > span { display: block; line-height: 21px; }
-.ks-site-footer__legal { display: block !important; width: 100%; text-align: center; }
-.ks-site-footer__legal p { display: block; width: 100%; margin: 0; }
+.ks-site-footer__bottom .ks-shell-container { display: flex; justify-content: center; }
+.ks-site-footer__legal { display: block !important; width: 100%; max-width: 100%; margin: 0 auto; text-align: center; }
+.ks-site-footer__legal p { display: block; width: 100%; margin: 0; text-align: center; }
 .ks-site-footer__powered { display: inline-block; margin-left: 10px; white-space: nowrap; }
 .ks-site-footer__separator { margin-right: 10px; color: rgba(255, 255, 255, .62); }
 .ks-site-header .navbar-collapse.collapse { display: none; }
@@ -9594,6 +9598,7 @@ body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow
 @media (min-width: 1200px) { .ks-site-header .navbar-collapse.collapse { display: block !important; } }
 @media (min-width: 1200px) { .ks-menu-button { width: auto; padding: 14px 10px; } .ks-site-header .ks-site-menu__more { position: relative; } .ks-site-header .dropdown-menu.is-open { position: absolute; right: 0; left: auto; } }
 @media (max-width: 1199px) { .ks-site-menu__search { position: static; } .ks-header-search { position: static; width: auto; margin: 4px 12px 12px; box-shadow: none; } }
+@media (max-width: 767px) { .ks-site-footer__grid { align-items: center; text-align: center; } .ks-site-footer__actions { justify-content: center; } }
 @media (max-width: 399px) { .ks-site-footer__powered { margin-left: 0; } .ks-site-footer__separator { margin-left: 8px; } }
 
 </style></head><body><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none">
@@ -9642,13 +9647,25 @@ body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow
   }
   function closeSearch() {
     if (headerSearch) headerSearch.hidden = true;
+    if (searchToggle) searchToggle.parentElement.classList.remove("is-search-open");
     setExpanded(searchToggle, false);
+  }
+  function closeNavigation() {
+    if (siteNav) siteNav.classList.remove("in");
+    if (menuToggle) menuToggle.classList.add("collapsed");
+    setExpanded(menuToggle, false);
+    closeMore();
+    closeSearch();
   }
 
   if (menuToggle && siteNav) menuToggle.addEventListener("click", function () {
-    var open = siteNav.classList.toggle("in");
-    menuToggle.classList.toggle("collapsed", !open);
-    setExpanded(menuToggle, open);
+    if (siteNav.classList.contains("in")) {
+      closeNavigation();
+      return;
+    }
+    siteNav.classList.add("in");
+    menuToggle.classList.remove("collapsed");
+    setExpanded(menuToggle, true);
     closeMore();
     closeSearch();
   });
@@ -9660,22 +9677,24 @@ body { min-width: 0; min-height: 100dvh; margin: 0; overflow-x: hidden; overflow
   });
   if (searchToggle && headerSearch && headerSearchInput) searchToggle.addEventListener("click", function () {
     var open = headerSearch.hidden;
-    headerSearch.hidden = !open;
-    setExpanded(searchToggle, open);
+    if (!open) {
+      closeSearch();
+      return;
+    }
+    headerSearch.hidden = false;
+    searchToggle.parentElement.classList.add("is-search-open");
+    setExpanded(searchToggle, true);
     closeMore();
-    if (open) headerSearchInput.focus();
+    headerSearchInput.focus();
   });
   document.addEventListener("click", function (event) {
+    if (siteNav && siteNav.classList.contains("in") && !siteNav.contains(event.target) && (!menuToggle || !menuToggle.contains(event.target))) closeNavigation();
     if (moreButton && !moreButton.parentElement.contains(event.target)) closeMore();
     if (headerSearch && !headerSearch.parentElement.contains(event.target)) closeSearch();
   });
   document.addEventListener("keydown", function (event) {
     if (event.key !== "Escape") return;
-    if (siteNav) siteNav.classList.remove("in");
-    if (menuToggle) menuToggle.classList.add("collapsed");
-    setExpanded(menuToggle, false);
-    closeMore();
-    closeSearch();
+    closeNavigation();
   });
 
   function createVideoPlayer(player) {

@@ -16,13 +16,25 @@
   }
   function closeSearch() {
     if (headerSearch) headerSearch.hidden = true;
+    if (searchToggle) searchToggle.parentElement.classList.remove("is-search-open");
     setExpanded(searchToggle, false);
+  }
+  function closeNavigation() {
+    if (siteNav) siteNav.classList.remove("in");
+    if (menuToggle) menuToggle.classList.add("collapsed");
+    setExpanded(menuToggle, false);
+    closeMore();
+    closeSearch();
   }
 
   if (menuToggle && siteNav) menuToggle.addEventListener("click", function () {
-    var open = siteNav.classList.toggle("in");
-    menuToggle.classList.toggle("collapsed", !open);
-    setExpanded(menuToggle, open);
+    if (siteNav.classList.contains("in")) {
+      closeNavigation();
+      return;
+    }
+    siteNav.classList.add("in");
+    menuToggle.classList.remove("collapsed");
+    setExpanded(menuToggle, true);
     closeMore();
     closeSearch();
   });
@@ -34,22 +46,24 @@
   });
   if (searchToggle && headerSearch && headerSearchInput) searchToggle.addEventListener("click", function () {
     var open = headerSearch.hidden;
-    headerSearch.hidden = !open;
-    setExpanded(searchToggle, open);
+    if (!open) {
+      closeSearch();
+      return;
+    }
+    headerSearch.hidden = false;
+    searchToggle.parentElement.classList.add("is-search-open");
+    setExpanded(searchToggle, true);
     closeMore();
-    if (open) headerSearchInput.focus();
+    headerSearchInput.focus();
   });
   document.addEventListener("click", function (event) {
+    if (siteNav && siteNav.classList.contains("in") && !siteNav.contains(event.target) && (!menuToggle || !menuToggle.contains(event.target))) closeNavigation();
     if (moreButton && !moreButton.parentElement.contains(event.target)) closeMore();
     if (headerSearch && !headerSearch.parentElement.contains(event.target)) closeSearch();
   });
   document.addEventListener("keydown", function (event) {
     if (event.key !== "Escape") return;
-    if (siteNav) siteNav.classList.remove("in");
-    if (menuToggle) menuToggle.classList.add("collapsed");
-    setExpanded(menuToggle, false);
-    closeMore();
-    closeSearch();
+    closeNavigation();
   });
 
   function createVideoPlayer(player) {
