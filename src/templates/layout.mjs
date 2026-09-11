@@ -1,8 +1,8 @@
 import { site } from "../data/site.mjs";
 
 export const external = ' target="_blank" rel="noopener noreferrer"';
-export const icon = (name) => `<svg class="ks-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/images/icons.svg#${name}"></use></svg>`;
-export const whatsappIcon = () => `<svg class="ks-whatsapp-icon" viewBox="0 0 448 512" aria-hidden="true"><use href="/assets/images/icons.svg#whatsapp"></use></svg>`;
+export const icon = (name) => `<svg class="ks-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#${name}"></use></svg>`;
+export const whatsappIcon = () => `<svg class="ks-whatsapp-icon" viewBox="0 0 448 512" aria-hidden="true"><use href="#whatsapp"></use></svg>`;
 
 function header(active) {
   const nav = site.navigation.map(([name, href]) => `<li${href === active ? ' class="active"' : ""}><a href="${href}">${name}</a></li>`).join("");
@@ -27,5 +27,5 @@ function footer() {
 }
 
 export function layout({ title, description, active = "", body }) {
-  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="${description}"><meta name="theme-color" content="#102f22"><title>${title} | Kurosu &amp; Cía.</title><link rel="icon" type="image/svg+xml" href="__FAVICON__"><style>__INLINE_STYLES__</style></head><body>__ICON_SPRITE__${header(active)}<main id="mainContent" tabindex="-1">${body}</main>${footer()}<script>window.KS_SEARCH_INDEX=__SEARCH_INDEX__;window.KS_ROUTE_PREFIX="__ROUTE_PREFIX__";</script><script>__INLINE_APP_JS__</script></body></html>`;
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="${description}"><meta name="theme-color" content="#102f22"><title>${title} | Kurosu &amp; Cía.</title><link rel="icon" type="image/svg+xml" href="__FAVICON__"><link rel="stylesheet" href="__SITE_CSS__"></head><body>__ICON_SPRITE__${header(active)}<main id="mainContent" tabindex="-1">${body}</main>${footer()}<script>window.KS_SEARCH_INDEX=__SEARCH_INDEX__;window.KS_ROUTE_PREFIX="__ROUTE_PREFIX__";</script><script src="__SITE_JS__"></script></body></html>`;
 }
