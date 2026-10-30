@@ -69,7 +69,7 @@ if (!/<link rel="icon" type="image\/svg\+xml" href="\.\/assets\/images\/favicon\
 if (!home.includes("id=\"searchToggle\"") || !home.includes("ks-header-search__group") || !home.includes("ks-header-search__submit") || !styles.includes("is-search-open") || home.includes("ks-search-link")) failures.push("index.html: buscador del header invalido");
 if (!/body\s*\{[^}]*display:\s*flex[^}]*flex-direction:\s*column[^}]*margin:\s*0/.test(styles) || !styles.includes("body > main { flex: 1 0 auto; }") || !styles.includes(".ks-site-footer { flex: 0 0 auto; }") || !styles.includes("min-height: 100dvh") || !styles.includes(".ks-site-footer__bottom .ks-shell-container { display: flex; justify-content: center; }")) failures.push("site.css: viewport o pie no centrado");
 if (!styles.includes(".ks-video-list {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr);") || styles.includes("grid-auto-flow: column")) failures.push("site.css: carrusel movil no eliminado");
-if (!home.includes("Powered by: KUROSU &amp; CÍA.")) failures.push("index.html: pie institucional incompleto");
+if (!home.includes("Powered by: KUROSU &amp; CIA.")) failures.push("index.html: pie institucional incompleto");
 for (const file of html.filter((file) => !file.endsWith("404.html"))) {
   const content = await readFile(file, "utf8");
   if (/href="(?:\.\/|\.\.\/)[^"]+\/$/.test(content)) failures.push(`${file}: enlace local apunta a carpeta`);

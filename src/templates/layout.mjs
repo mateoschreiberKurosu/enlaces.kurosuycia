@@ -23,7 +23,7 @@ function footer() {
   return `<footer class="footer ks-site-footer" role="contentinfo"><div class="ks-site-footer__main"><div class="container ks-shell-container"><div class="ks-site-footer__grid">
     <a class="ks-site-brand ks-site-brand--footer" href="/" aria-label="KUROSU &amp; CÍA. - Inicio"><img class="ks-site-brand__logo" src="/assets/images/kurosu-logo-white.svg" alt="KUROSU &amp; CÍA." width="1561" height="158"></a>
     <nav class="ks-site-footer__actions" aria-label="Accesos finales"><a href="${site.official}"${external}>Sitio oficial</a><a class="ks-footer-contact" href="${site.whatsapp}"${external}>${whatsappIcon()}<span>WhatsApp 24 hs</span></a></nav>
-  </div></div></div><div class="footer-bottom ks-site-footer__bottom"><div class="container ks-shell-container"><div class="ks-site-footer__legal"><p>Copyright © ${new Date().getFullYear()}. Todos los derechos reservados.<span class="ks-site-footer__powered"><span class="ks-site-footer__separator" aria-hidden="true">|</span> Powered by: KUROSU &amp; CÍA.</span></p></div></div></div></footer>`;
+  </div></div></div><div class="footer-bottom ks-site-footer__bottom"><div class="container ks-shell-container"><div class="ks-site-footer__legal"><p>Copyright © ${new Date().getFullYear()}. Todos los derechos reservados.<span class="ks-site-footer__powered"><span class="ks-site-footer__separator" aria-hidden="true">|</span> Powered by: KUROSU &amp; CIA.</span></p></div></div></div></footer>`;
 }
 
 export function layout({ title, description, active = "", body }) {
