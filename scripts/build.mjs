@@ -64,7 +64,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
 const fontNames = ["JDSansPro-Medium.woff2", "JDSansPro-Bold.woff2", "poppins-400-latin.woff2", "poppins-500-latin.woff2", "poppins-600-latin.woff2", "poppins-700-latin.woff2"];
-const imageNames = ["kurosu-logo-black.svg", "kurosu-logo-white.svg", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
+const imageNames = ["kurosu-logo-black.svg", "kurosu-logo-white.svg", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg", "social-instagram.svg", "social-youtube.svg", "social-facebook.svg", "social-linkedin.svg"];
 const videoNames = ["video-MuX-2vtmI8A.jpg", "video-PS-fCoKlDdk.jpg", "video-c1YK510VfYY.jpg"];
 const assetPaths = Object.fromEntries(await Promise.all([
   ...fontNames.map(async (name) => [name, await copyAsset("fonts", name)]),

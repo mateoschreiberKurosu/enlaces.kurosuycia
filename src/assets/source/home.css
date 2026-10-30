@@ -142,7 +142,7 @@
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.36);
   border-radius: 8px;
-  background: var(--ks-green-900);
+  background: #fff;
   color: #fff;
   font-size: 20px;
   transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
@@ -152,7 +152,7 @@
 .ks-social__link:hover,
 .ks-social__link:focus {
   border-color: var(--ks-yellow);
-  background: var(--ks-yellow);
+  background: #fff;
   color: var(--ks-green-950);
   transform: translateY(-2px);
 }
@@ -487,6 +487,8 @@
   height: 23px;
   stroke-width: 2;
 }
+
+.ks-social__link img { display: block; width: 24px; height: 24px; }
 
 @media (min-width: 1024px) {
   .ks-home-hero__tagline { font-size: 18px; }
