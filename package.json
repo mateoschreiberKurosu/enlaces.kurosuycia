@@ -4,12 +4,19 @@
   "private": true,
   "description": "Copia estática pública del portal Kurosu.",
   "type": "module",
+  "packageManager": "npm@11.19.0",
+  "engines": { "node": ">=24 <25", "npm": ">=11 <12" },
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node node_modules/@playwright/test/cli.js test",
+    "audit:security": "npm audit --audit-level=high && npm audit --omit=dev --audit-level=high",
+    "check:production": "node scripts/verify-production.mjs"
   },
   "devDependencies": {
-    "wrangler": "^4.0.0"
+    "wrangler": "4.156.0",
+    "@playwright/test": "1.64.1"
   }
 }

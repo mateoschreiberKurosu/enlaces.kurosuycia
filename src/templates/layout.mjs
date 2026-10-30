@@ -27,5 +27,5 @@ function footer() {
 }
 
 export function layout({ title, description, active = "", body }) {
-  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="${description}"><meta name="theme-color" content="#367c2b"><title>${title} | KUROSU &amp; CÍA.</title><link rel="icon" type="image/svg+xml" href="__FAVICON__"><link rel="stylesheet" href="__SITE_CSS__"></head><body>__ICON_SPRITE__${header(active)}<main id="mainContent" tabindex="-1">${body}</main>${footer()}<script>window.KS_SEARCH_INDEX=__SEARCH_INDEX__;window.KS_ROUTE_PREFIX="__ROUTE_PREFIX__";</script><script src="__SITE_JS__"></script></body></html>`;
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="${description}"><meta name="theme-color" content="#367c2b"><title>${title} | KUROSU &amp; CÍA.</title><link rel="icon" type="image/svg+xml" href="__FAVICON__"><link rel="stylesheet" href="__SITE_CSS__"></head><body data-ks-route-prefix="__ROUTE_PREFIX__">__ICON_SPRITE__${header(active)}<main id="mainContent" tabindex="-1">${body}</main>${footer()}<script src="__INIT_JS__" defer></script><script src="__SITE_JS__" defer></script></body></html>`;
 }

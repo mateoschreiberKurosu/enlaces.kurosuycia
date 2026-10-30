@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { layout } from "../src/templates/layout.mjs";
 import * as pages from "../src/templates/pages.mjs";
 import { disableOfficialSiteLinks } from "../src/templates/maintenance.mjs";
+import { renderHeadersFile } from "./security-policy.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -80,10 +81,11 @@ const siteCss = await writeAsset("css", "site.css", Buffer.from(styles));
 const siteJs = await writeAsset("js", "site.js", await readFile(path.join(root, "src", "assets", "site.js")));
 
 const searchIndex = routes.filter(([route]) => route !== "404.html").map(([route, page]) => ({ title: page.title, description: page.description, url: route === "index.html" ? "/" : `/${route.replace(/index\.html$/, "")}` }));
+const initJs = await writeAsset("js", "init.js", Buffer.from(`window.KS_SEARCH_INDEX=${JSON.stringify(searchIndex)};\nwindow.KS_ROUTE_PREFIX=document.body.dataset.ksRoutePrefix;\n`));
 for (const [route, page] of routes) {
   let html = disableOfficialSiteLinks(layout(page));
   for (const [name, assetPath] of Object.entries(assetPaths)) html = html.replaceAll(`/assets/images/${name}`, `/${assetPath}`);
-  html = html.replaceAll("__ICON_SPRITE__", iconSprite).replaceAll("__FAVICON__", `/${favicon}`).replaceAll("__SITE_CSS__", `/${siteCss}`).replaceAll("__SITE_JS__", `/${siteJs}`).replaceAll("__SEARCH_INDEX__", JSON.stringify(searchIndex)).replaceAll("__ROUTE_PREFIX__", route.includes("/") ? "../" : "./");
+  html = html.replaceAll("__ICON_SPRITE__", iconSprite).replaceAll("__FAVICON__", `/${favicon}`).replaceAll("__SITE_CSS__", `/${siteCss}`).replaceAll("__SITE_JS__", `/${siteJs}`).replaceAll("__INIT_JS__", `/${initJs}`).replaceAll("__ROUTE_PREFIX__", route.includes("/") ? "../" : "./");
   await write(route, localizeRootPaths(html, route));
 }
 
@@ -91,6 +93,6 @@ const sitemapLocation = siteUrl ? `${siteUrl}/sitemap.xml` : "/sitemap.xml";
 await write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${sitemapLocation}\n`);
 const sitemapUrls = siteUrl ? searchIndex.map(({ url }) => `<url><loc>${siteUrl}${url}</loc></url>`).join("") : "";
 await write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapUrls}</urlset>`);
-await write("_headers", "/*\n  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; frame-src https://www.youtube-nocookie.com\n  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: SAMEORIGIN\n  Referrer-Policy: strict-origin-when-cross-origin\n\n/assets/*\n  Cache-Control: public, max-age=31556952, immutable\n");
+await write("_headers", renderHeadersFile());
 await write("_redirects", "/busqueda /busqueda/ 301\n/contacto /contacto/ 301\n/enlaces-de-productos /enlaces-de-productos/ 301\n/soporte-tecnico /soporte-tecnico/ 301\n/promociones /promociones/ 301\n/preguntas-frecuentes /preguntas-frecuentes/ 301\n/sobre-nosotros /sobre-nosotros/ 301\n/acceso-denegado /acceso-denegado/ 301\n");
-console.log(`Build complete: ${routes.length} pages and ${Object.keys(assetPaths).length + 3} fingerprinted assets in ${dist}`);
+console.log(`Build complete: ${routes.length} pages and ${Object.keys(assetPaths).length + 4} fingerprinted assets in ${dist}`);

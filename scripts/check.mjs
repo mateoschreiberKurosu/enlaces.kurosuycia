@@ -2,6 +2,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import path from "node:path";
+import { renderHeadersFile } from "./security-policy.mjs";
 
 const root = path.resolve("dist");
 const failures = [];
@@ -37,6 +38,7 @@ for (const file of html) {
   if (/href=["']#["']/.test(content)) failures.push(`${file}: href=# invalido`);
   if (/spotify/i.test(content)) failures.push(`${file}: Spotify detectado`);
   if (!content.includes("<main")) failures.push(`${file}: sin main`);
+  if (/<script\b(?![^>]*\bsrc=)[^>]*>|<style\b|\sstyle\s*=|\son[a-z]+\s*=/i.test(content)) failures.push(`${file}: script, estilo o evento inline`);
   if (/\b(?:src|href)="\/(?!\/)/.test(content)) failures.push(`${file}: ruta absoluta incompatible con file://`);
   if (/\bsrc="https?:\/\//.test(content)) failures.push(`${file}: recurso remoto no permitido`);
   if (/data:(?:font|image|text\/css|text\/javascript)/.test(content)) failures.push(`${file}: assets inline no permitidos`);
@@ -55,7 +57,9 @@ for (const file of html) {
 const homeFile = path.join(root, "index.html");
 const home = await readFile(homeFile, "utf8");
 const cssMatch = home.match(/<link rel="stylesheet" href="([^"]*assets\/css\/site\.[a-f0-9]{12}\.css)">/);
-const jsMatch = home.match(/<script src="([^"]*assets\/js\/site\.[a-f0-9]{12}\.js)"><\/script>/);
+const jsMatch = home.match(/<script src="([^"]*assets\/js\/site\.[a-f0-9]{12}\.js)" defer><\/script>/);
+const initMatch = home.match(/<script src="([^"]*assets\/js\/init\.[a-f0-9]{12}\.js)" defer><\/script>/);
+if (!initMatch || !jsMatch || home.indexOf(initMatch[0]) > home.indexOf(jsMatch[0])) failures.push("index.html: inicializacion externa o secuencia defer invalida");
 if (!cssMatch || !jsMatch) failures.push("index.html: CSS o JavaScript fingerprinted inexistente");
 const styles = cssMatch ? await readFile(path.resolve(path.dirname(homeFile), cssMatch[1]), "utf8") : "";
 const siteJs = jsMatch ? await readFile(path.resolve(path.dirname(homeFile), jsMatch[1]), "utf8") : "";
@@ -79,9 +83,8 @@ if (siteJs.includes("innerHTML")) failures.push("site.js: renderizado HTML inseg
 if (!siteJs.includes('addEventListener("input"') || !siteJs.includes("contains(event.target)") || !siteJs.includes("closeNavigation")) failures.push("site.js: interacciones de busqueda o menu incompletas");
 
 const headers = await readFile(path.join(root, "_headers"), "utf8");
-for (const header of ["Content-Security-Policy:", "Permissions-Policy:", "X-Content-Type-Options: nosniff", "X-Frame-Options: SAMEORIGIN", "Referrer-Policy: strict-origin-when-cross-origin", "frame-src https://www.youtube-nocookie.com", "script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com", "connect-src 'self' https://cloudflareinsights.com", "Cache-Control: public, max-age=31556952, immutable"]) {
-  if (!headers.includes(header)) failures.push(`_headers: falta ${header}`);
-}
+if (headers.replaceAll("\r\n", "\n") !== renderHeadersFile()) failures.push("_headers: difiere de la politica central");
+if (/unsafe-inline|unsafe-eval/.test(headers)) failures.push("_headers: excepcion insegura de CSP");
 const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
 if (productionBuild) {
   const locations = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (match) => match[1]);
