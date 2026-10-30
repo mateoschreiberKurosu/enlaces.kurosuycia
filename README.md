@@ -1,6 +1,6 @@
 # Kurosu Portal estático
 
-Copia pública estática autocontenida del portal Kurosu, preparada para Cloudflare Workers Static Assets. El contenido fuente vive en `src/`; `dist/` es el único directorio a publicar. Para una revisión rápida sin servidor, abrí `dist/index.html`; cada página incluye Bootstrap, CSS, Poppins, JavaScript, iconos e imágenes locales. Los enlaces internos se abren en la misma pestaña; los externos abren una pestaña nueva con `rel="noopener noreferrer"`.
+Copia pública estática autocontenida del portal Kurosu, preparada para Cloudflare Workers Static Assets. El contenido fuente vive en `src/`; `dist/` es el único directorio a publicar. Para una revisión rápida sin servidor, abrí `dist/index.html`; cada página incluye Bootstrap, CSS, JD Sans Pro, Poppins como respaldo, JavaScript, iconos e imágenes locales. Los enlaces internos se abren en la misma pestaña; los externos abren una pestaña nueva con `rel="noopener noreferrer"`.
 
 ```powershell
 npm ci --ignore-scripts

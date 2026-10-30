@@ -8383,6 +8383,22 @@ button.close {
 }
 /* Kurosu 2026 shell */
 @font-face {
+    font-family: "JD Sans";
+    src: url("../fonts/JDSansPro-Medium.e6584503acaa.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "JD Sans";
+    src: url("../fonts/JDSansPro-Bold.7c4bedd2573c.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
     font-family: "Poppins";
     src: url("../fonts/poppins-400-latin.7d93459d8658.woff2") format("woff2");
     font-style: normal;

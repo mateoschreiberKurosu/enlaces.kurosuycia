@@ -63,7 +63,7 @@ function localizeRootPaths(html, route) {
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
-const fontNames = ["poppins-400-latin.woff2", "poppins-500-latin.woff2", "poppins-600-latin.woff2", "poppins-700-latin.woff2"];
+const fontNames = ["JDSansPro-Medium.woff2", "JDSansPro-Bold.woff2", "poppins-400-latin.woff2", "poppins-500-latin.woff2", "poppins-600-latin.woff2", "poppins-700-latin.woff2"];
 const imageNames = ["kurosu-logo-black.svg", "kurosu-logo-white.svg", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
 const videoNames = ["video-MuX-2vtmI8A.jpg", "video-PS-fCoKlDdk.jpg", "video-c1YK510VfYY.jpg"];
 const assetPaths = Object.fromEntries(await Promise.all([
