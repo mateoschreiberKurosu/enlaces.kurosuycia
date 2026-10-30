@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { layout } from "../src/templates/layout.mjs";
 import * as pages from "../src/templates/pages.mjs";
 import { disableOfficialSiteLinks } from "../src/templates/maintenance.mjs";
+import { resolvePublicationOrigin, sitemapUrls } from "./publication-config.mjs";
 import { renderHeadersFile } from "./security-policy.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -12,9 +13,7 @@ const dist = path.join(root, "dist");
 const sourceAssets = path.join(root, "src", "assets", "source");
 const sourceImages = path.join(root, "src", "assets", "images");
 const iconSprite = await readFile(path.join(root, "src", "assets", "icons.svg"), "utf8");
-const productionBuild = process.env.PRODUCTION_BUILD === "1";
-const siteUrl = (process.env.PUBLIC_SITE_URL || "").replace(/\/$/, "");
-if (productionBuild && !siteUrl) throw new Error("PUBLIC_SITE_URL es obligatorio cuando PRODUCTION_BUILD=1.");
+const siteUrl = resolvePublicationOrigin();
 
 const routes = [
   ["index.html", { title: "Inicio", description: "KUROSU & CÍA. en Paraguay.", active: "/", body: pages.home() }],
@@ -89,10 +88,9 @@ for (const [route, page] of routes) {
   await write(route, localizeRootPaths(html, route));
 }
 
-const sitemapLocation = siteUrl ? `${siteUrl}/sitemap.xml` : "/sitemap.xml";
-await write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${sitemapLocation}\n`);
-const sitemapUrls = siteUrl ? searchIndex.map(({ url }) => `<url><loc>${siteUrl}${url}</loc></url>`).join("") : "";
-await write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapUrls}</urlset>`);
+await write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`);
+const sitemapEntries = sitemapUrls(siteUrl).map((url) => `<url><loc>${url}</loc></url>`).join("");
+await write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${sitemapEntries}</urlset>`);
 await write("_headers", renderHeadersFile());
 await write("_redirects", "/busqueda /busqueda/ 301\n/contacto /contacto/ 301\n/enlaces-de-productos /enlaces-de-productos/ 301\n/soporte-tecnico /soporte-tecnico/ 301\n/promociones /promociones/ 301\n/preguntas-frecuentes /preguntas-frecuentes/ 301\n/sobre-nosotros /sobre-nosotros/ 301\n/acceso-denegado /acceso-denegado/ 301\n");
 console.log(`Build complete: ${routes.length} pages and ${Object.keys(assetPaths).length + 4} fingerprinted assets in ${dist}`);

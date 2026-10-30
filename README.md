@@ -8,11 +8,10 @@ npm run build
 npm run dev
 ```
 
-Para un build de producción, `PUBLIC_SITE_URL` es obligatorio y genera el sitemap con URLs absolutas. En PowerShell:
+Todos los builds generan `robots.txt` y sitemap con `https://www.kurosu.com.py`. `PUBLIC_SITE_URL` es opcional por compatibilidad; si se define, debe usar exactamente ese origen (se acepta una barra final). En PowerShell:
 
 ```powershell
-$env:PRODUCTION_BUILD = '1'
-$env:PUBLIC_SITE_URL = 'https://enlaces.kurosuycia.com.py'
+$env:PUBLIC_SITE_URL = 'https://www.kurosu.com.py'
 npm run build
 ```
 

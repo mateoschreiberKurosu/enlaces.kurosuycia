@@ -2,17 +2,15 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import path from "node:path";
+import { publicationOrigin, resolvePublicationOrigin, sitemapRoutes, sitemapUrls } from "./publication-config.mjs";
 import { renderHeadersFile } from "./security-policy.mjs";
 
 const root = path.resolve("dist");
 const failures = [];
-const productionBuild = process.env.PRODUCTION_BUILD === "1";
-const siteUrl = (process.env.PUBLIC_SITE_URL || "").replace(/\/$/, "");
-const sitemapRoutes = ["/", "/contacto/", "/enlaces-de-productos/", "/soporte-tecnico/", "/promociones/", "/preguntas-frecuentes/", "/sobre-nosotros/", "/busqueda/", "/acceso-denegado/"];
 // Baseline post-correccion: home 18,317 B; secundaria maxima 11,267 B;
 // assets compartidos ~2.61 MB y 17 archivos. El margen permite cambios menores.
 const performanceBudget = { homeHtmlBytes: 23000, secondaryHtmlBytes: 14500, assetsBytes: 3300000, assetCount: 24 };
-if (productionBuild && !siteUrl) failures.push("PUBLIC_SITE_URL es obligatorio cuando PRODUCTION_BUILD=1.");
+try { resolvePublicationOrigin(); } catch (error) { failures.push(error.message); }
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -86,13 +84,14 @@ const headers = await readFile(path.join(root, "_headers"), "utf8");
 if (headers.replaceAll("\r\n", "\n") !== renderHeadersFile()) failures.push("_headers: difiere de la politica central");
 if (/unsafe-inline|unsafe-eval/.test(headers)) failures.push("_headers: excepcion insegura de CSP");
 const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
-if (productionBuild) {
-  const locations = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (match) => match[1]);
-  if (locations.length !== sitemapRoutes.length) failures.push(`sitemap.xml: se esperaban ${sitemapRoutes.length} URLs y se encontraron ${locations.length}`);
-  for (const route of sitemapRoutes) if (!locations.includes(`${siteUrl}${route}`)) failures.push(`sitemap.xml: falta ${siteUrl}${route}`);
-  const robots = await readFile(path.join(root, "robots.txt"), "utf8");
-  if (!robots.includes(`Sitemap: ${siteUrl}/sitemap.xml`)) failures.push(`robots.txt: falta Sitemap: ${siteUrl}/sitemap.xml`);
-}
+const locations = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (match) => match[1]);
+const expectedSitemapUrls = sitemapUrls();
+if (locations.length !== sitemapRoutes.length) failures.push(`sitemap.xml: se esperaban ${sitemapRoutes.length} URLs y se encontraron ${locations.length}`);
+for (const url of expectedSitemapUrls) if (!locations.includes(url)) failures.push(`sitemap.xml: falta ${url}`);
+if (locations.some((url) => !expectedSitemapUrls.includes(url))) failures.push("sitemap.xml: contiene URLs fuera del origen de publicacion acordado");
+const robots = await readFile(path.join(root, "robots.txt"), "utf8");
+const expectedRobots = `User-agent: *\nAllow: /\nSitemap: ${publicationOrigin}/sitemap.xml\n`;
+if (robots.replaceAll("\r\n", "\n") !== expectedRobots) failures.push(`robots.txt: debe contener exactamente ${publicationOrigin}/sitemap.xml`);
 
 const homeSize = (await stat(homeFile)).size;
 const secondarySizes = await Promise.all(html.filter((file) => path.basename(file) === "index.html" && file !== homeFile).map(async (file) => (await stat(file)).size));
@@ -103,7 +102,7 @@ if (assetsBytes > performanceBudget.assetsBytes) failures.push(`presupuesto: ass
 if (assetFiles.length > performanceBudget.assetCount) failures.push(`presupuesto: cantidad de assets supera ${performanceBudget.assetCount} (${assetFiles.length})`);
 
 const run = promisify(execFile);
-for (const file of [path.resolve("src/assets/site.js"), path.resolve("scripts/build.mjs"), path.resolve("scripts/check.mjs")]) {
+for (const file of [path.resolve("src/assets/site.js"), path.resolve("scripts/build.mjs"), path.resolve("scripts/check.mjs"), path.resolve("scripts/publication-config.mjs")]) {
   try { await run(process.execPath, ["--check", file]); } catch (error) { failures.push(`${file}: ${error.stderr || error.message}`); }
 }
 if (failures.length) { console.error(failures.join("\n")); process.exit(1); }

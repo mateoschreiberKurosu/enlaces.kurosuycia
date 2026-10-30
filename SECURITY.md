@@ -11,6 +11,7 @@ Las cuentas GitHub/Cloudflare, el proceso de publicación y sus credenciales son
 `scripts/security-policy.mjs` es la fuente de cabeceras para el build y el servidor local. Se genera `dist/_headers` para Workers Static Assets:
 
 - CSP sin `unsafe-inline` ni `unsafe-eval`. Inicialización externa fingerprinted antes del código principal, ambos con `defer`; el prefijo para navegación `file://` es un atributo de datos.
+- `upgrade-insecure-requests` complementa HSTS para recursos de la misma navegación que cuenten con equivalente HTTPS; no agrega orígenes, comodines ni sustituye HSTS.
 - Estilos locales; los iconos se ocultan mediante CSS externo, no atributos `style`.
 - Scripts externos limitados a Cloudflare Insights; conexión a la misma procedencia y `https://cloudflareinsights.com`; marcos limitados a `https://www.youtube-nocookie.com`.
 - HSTS `max-age=86400`, sin `includeSubDomains` ni preload. Solo establece política para el hostname visitado. Mantener HTTPS también al restituir el hosting original.
@@ -53,7 +54,7 @@ Publicar mediante la integración Git ya existente del Worker. No modificar DNS,
 npm run check:production
 ```
 
-El chequeo falla si faltan las cabeceras del repo o los assets y advierte sobre cabeceras reintroducidas fuera del repo. Una página de bloqueo 403 de Cloudflare no cuenta como una validación de la landing. Revisar en un navegador real búsqueda, menús, reproducción solicitada y solicitudes de Insights, especialmente si existen reglas de transformación de cabeceras en Cloudflare.
+La publicación genera siempre `robots.txt` y las nueve URLs del sitemap con `https://www.kurosu.com.py`; una variable `PUBLIC_SITE_URL` distinta se rechaza antes de escribir `dist/`. El chequeo de producción visita las diez páginas, una ruta 404, robots, sitemap y assets; `npm run check:production -- --json` emite además la matriz con hostname, URL, control, valor esperado, observado y clasificación. Falla por requisitos del repositorio y diferencia una página de bloqueo 403, una falla de red o cabeceras reintroducidas por Cloudflare como advertencias externas, no como aprobación de la landing. Revisar en un navegador real búsqueda, menús, reproducción solicitada y solicitudes de Insights, especialmente si existen reglas de transformación de cabeceras en Cloudflare.
 
 Para revertir código, usar el commit anterior conocido. Revertir o borrar HSTS no elimina políticas ya guardadas en navegadores: para cancelarlas antes de tiempo hay que servir `Strict-Transport-Security: max-age=0` por HTTPS en cada hostname afectado. Si no, mantener HTTPS mientras vence el plazo de un día.
 

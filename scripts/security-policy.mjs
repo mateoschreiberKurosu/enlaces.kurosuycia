@@ -1,6 +1,6 @@
 export const securityHeaders = Object.freeze({
   "Content-Security-Policy": [
-    "default-src 'self'", "base-uri 'self'", "object-src 'none'",
+    "default-src 'self'", "upgrade-insecure-requests", "base-uri 'self'", "object-src 'none'",
     "form-action 'self'", "frame-ancestors 'self'", "img-src 'self' data:",
     "font-src 'self'", "style-src 'self'",
     "script-src 'self' https://static.cloudflareinsights.com",
