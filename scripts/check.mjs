@@ -63,11 +63,11 @@ const assetNames = assetFiles.map((file) => path.relative(root, file).replaceAll
 if (!assetNames.every((file) => /^assets\/(?:css|fonts|images|js)\/.+\.[a-f0-9]{12}\./.test(file))) failures.push("dist/assets: archivo sin fingerprint");
 if ((home.match(/data-ks-video data-video-id/g) || []).length !== 3) failures.push("index.html: faltan reproductores diferidos de YouTube");
 if (!siteJs.includes("youtube-nocookie.com/embed/") || !siteJs.includes("controls=1") || !siteJs.includes("playsinline=1")) failures.push("site.js: configuracion de iframe YouTube incompleta");
-if (!/<link rel="icon" type="image\/svg\+xml" href="\.\/assets\/images\/favicon\.[a-f0-9]{12}\.svg">/.test(home) || home.includes("Logo-sm-64.png")) failures.push("index.html: favicon Kurosu invalido");
+if (!/<link rel="icon" type="image\/svg\+xml" href="\.\/assets\/images\/favicon\.[a-f0-9]{12}\.svg">/.test(home) || home.includes("Logo-sm-64.png")) failures.push("index.html: favicon KUROSU & CÍA. invalido");
 if (!home.includes("id=\"searchToggle\"") || !home.includes("ks-header-search__group") || !home.includes("ks-header-search__submit") || !styles.includes("is-search-open") || home.includes("ks-search-link")) failures.push("index.html: buscador del header invalido");
 if (!/body\s*\{[^}]*display:\s*flex[^}]*flex-direction:\s*column[^}]*margin:\s*0/.test(styles) || !styles.includes("body > main { flex: 1 0 auto; }") || !styles.includes(".ks-site-footer { flex: 0 0 auto; }") || !styles.includes("min-height: 100dvh") || !styles.includes(".ks-site-footer__bottom .ks-shell-container { display: flex; justify-content: center; }")) failures.push("site.css: viewport o pie no centrado");
 if (!styles.includes(".ks-video-list {\n  display: grid;\n  grid-template-columns: minmax(0, 1fr);") || styles.includes("grid-auto-flow: column")) failures.push("site.css: carrusel movil no eliminado");
-if (!home.includes("Powered by: Kurosu &amp; Cía S.A.")) failures.push("index.html: pie institucional incompleto");
+if (!home.includes("Powered by: KUROSU &amp; CÍA.")) failures.push("index.html: pie institucional incompleto");
 for (const file of html.filter((file) => !file.endsWith("404.html"))) {
   const content = await readFile(file, "utf8");
   if (/href="(?:\.\/|\.\.\/)[^"]+\/$/.test(content)) failures.push(`${file}: enlace local apunta a carpeta`);

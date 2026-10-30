@@ -68,7 +68,7 @@
 
   function createVideoPlayer(player) {
     var videoId = player.getAttribute("data-video-id");
-    var videoTitle = player.getAttribute("data-video-title") || "Video de Kurosu y Cía.";
+    var videoTitle = player.getAttribute("data-video-title") || "Video de KUROSU & CÍA.";
     var videoStart = Number.parseInt(player.getAttribute("data-video-start") || "0", 10) || 0;
     if (!/^[A-Za-z0-9_-]{11}$/.test(videoId || "") || player.classList.contains("is-playing")) return;
     var iframe = document.createElement("iframe");

@@ -16,14 +16,14 @@ const siteUrl = (process.env.PUBLIC_SITE_URL || "").replace(/\/$/, "");
 if (productionBuild && !siteUrl) throw new Error("PUBLIC_SITE_URL es obligatorio cuando PRODUCTION_BUILD=1.");
 
 const routes = [
-  ["index.html", { title: "Inicio", description: "Kurosu & Cía. en Paraguay.", active: "/", body: pages.home() }],
-  ["contacto/index.html", { title: "Contacto", description: "Canales de atención de Kurosu.", active: "/contacto/", body: pages.contact() }],
-  ["enlaces-de-productos/index.html", { title: "Enlaces de Productos", description: "Categorías oficiales de productos Kurosu.", active: "/enlaces-de-productos/", body: pages.products() }],
-  ["soporte-tecnico/index.html", { title: "Soporte Técnico", description: "Soporte técnico y recursos de Kurosu.", active: "/soporte-tecnico/", body: pages.support() }],
-  ["promociones/index.html", { title: "Promociones", description: "Consultas sobre oportunidades vigentes de Kurosu.", active: "/promociones/", body: pages.promotions() }],
-  ["preguntas-frecuentes/index.html", { title: "Preguntas frecuentes", description: "Respuestas rápidas del portal Kurosu.", active: "/preguntas-frecuentes/", body: pages.faq() }],
-  ["sobre-nosotros/index.html", { title: "Sobre nosotros", description: "Información institucional de Kurosu & Cía.", active: "/sobre-nosotros/", body: pages.about() }],
-  ["busqueda/index.html", { title: "Búsqueda", description: "Buscador del portal Kurosu.", active: "/busqueda/", body: pages.search() }],
+  ["index.html", { title: "Inicio", description: "KUROSU & CÍA. en Paraguay.", active: "/", body: pages.home() }],
+  ["contacto/index.html", { title: "Contacto", description: "Canales de atención de KUROSU & CÍA.", active: "/contacto/", body: pages.contact() }],
+  ["enlaces-de-productos/index.html", { title: "Enlaces de Productos", description: "Categorías oficiales de productos KUROSU & CÍA.", active: "/enlaces-de-productos/", body: pages.products() }],
+  ["soporte-tecnico/index.html", { title: "Soporte Técnico", description: "Soporte técnico y recursos de KUROSU & CÍA.", active: "/soporte-tecnico/", body: pages.support() }],
+  ["promociones/index.html", { title: "Promociones", description: "Consultas sobre oportunidades vigentes de KUROSU & CÍA.", active: "/promociones/", body: pages.promotions() }],
+  ["preguntas-frecuentes/index.html", { title: "Preguntas frecuentes", description: "Respuestas rápidas del portal KUROSU & CÍA.", active: "/preguntas-frecuentes/", body: pages.faq() }],
+  ["sobre-nosotros/index.html", { title: "Sobre nosotros", description: "Información institucional de KUROSU & CÍA.", active: "/sobre-nosotros/", body: pages.about() }],
+  ["busqueda/index.html", { title: "Búsqueda", description: "Buscador del portal KUROSU & CÍA.", active: "/busqueda/", body: pages.search() }],
   ["acceso-denegado/index.html", { title: "Acceso denegado", description: "Página de acceso restringido.", body: pages.message("denied") }],
   ["404.html", { title: "Página no encontrada", description: "Página no encontrada.", body: pages.message("404") }]
 ];
@@ -63,7 +63,7 @@ await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
 const fontNames = ["poppins-400-latin.woff2", "poppins-500-latin.woff2", "poppins-600-latin.woff2", "poppins-700-latin.woff2"];
-const imageNames = ["kurosu-k-mark.png", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-careers.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
+const imageNames = ["kurosu-logo-black.svg", "kurosu-logo-white.svg", "kurosu-hub-background-desktop.png", "kurosu-hub-background-mobile.png", "kurosu-hub-profile.jpg", "kurosu-hub-machinefinder.jpg", "kurosu-hub-official.jpg"];
 const videoNames = ["video-MuX-2vtmI8A.jpg", "video-PS-fCoKlDdk.jpg", "video-c1YK510VfYY.jpg"];
 const assetPaths = Object.fromEntries(await Promise.all([
   ...fontNames.map(async (name) => [name, await copyAsset("fonts", name)]),
@@ -71,8 +71,8 @@ const assetPaths = Object.fromEntries(await Promise.all([
   ...videoNames.map(async (name) => [name, await copyAsset("images", name, sourceImages)])
 ]));
 
-const markData = await readFile(path.join(sourceAssets, "kurosu-k-mark.png"));
-const favicon = await writeAsset("images", "favicon.svg", Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#367c2b"/><image href="data:image/png;base64,${markData.toString("base64")}" x="10" y="10" width="44" height="44" preserveAspectRatio="xMidYMid meet"/></svg>`));
+const logoSvg = await readFile(path.join(sourceAssets, "kurosu-logo-black.svg"), "utf8");
+const favicon = await writeAsset("images", "favicon.svg", Buffer.from(logoSvg.replace(/(<svg\b[^>]*>)/, '$1<rect width="100%" height="100%" fill="white"/>')));
 
 let styles = `${await readFile(path.join(sourceAssets, "bootstrap.min.css"), "utf8")}\n${await readFile(path.join(sourceAssets, "kurosu-ui.css"), "utf8")}\n${await readFile(path.join(sourceAssets, "home.css"), "utf8")}\n${await readFile(path.join(root, "src", "assets", "overrides.css"), "utf8")}\n`;
 for (const name of fontNames) styles = styles.replaceAll(`url("/${name}")`, `url("../fonts/${path.basename(assetPaths[name])}")`);

@@ -10,7 +10,7 @@ function header(active) {
   return `<header class="navbar navbar-inverse navbar-static-top ks-site-header" role="banner">
   <a class="skip-link" href="#mainContent">Saltar al contenido</a>
   <div class="container ks-shell-container"><div class="navbar-header">
-    <a class="navbar-brand ks-site-brand" href="/" aria-label="Kurosu y Cía. - Inicio"><span class="ks-site-brand__mark"><img src="/assets/images/kurosu-k-mark.png" alt="" width="22" height="22"></span><span class="ks-site-brand__name">Kurosu <strong>&amp; Cía.</strong></span></a>
+    <a class="navbar-brand ks-site-brand" href="/" aria-label="KUROSU &amp; CÍA. - Inicio"><img class="ks-site-brand__logo" src="/assets/images/kurosu-logo-black.svg" alt="KUROSU &amp; CÍA." width="1561" height="158"></a>
     <button id="menuToggle" class="navbar-toggle collapsed ks-site-menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span class="sr-only">Abrir navegación</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
   </div><nav id="siteNav" class="navbar-collapse collapse ks-site-nav" aria-label="Navegación principal"><ul class="nav navbar-nav ks-site-menu__links">${nav}
     <li class="dropdown ks-site-menu__more"><button class="ks-menu-button" type="button" aria-expanded="false" aria-controls="moreMenu">Más <span class="caret"></span></button><ul id="moreMenu" class="dropdown-menu">${more}</ul></li>
@@ -21,11 +21,11 @@ function header(active) {
 
 function footer() {
   return `<footer class="footer ks-site-footer" role="contentinfo"><div class="ks-site-footer__main"><div class="container ks-shell-container"><div class="ks-site-footer__grid">
-    <a class="ks-site-brand ks-site-brand--footer" href="/" aria-label="Kurosu y Cía. - Inicio"><span class="ks-site-brand__mark"><img src="/assets/images/kurosu-k-mark.png" alt="" width="22" height="22"></span><span class="ks-site-brand__name">Kurosu <strong>&amp; Cía.</strong></span></a>
+    <a class="ks-site-brand ks-site-brand--footer" href="/" aria-label="KUROSU &amp; CÍA. - Inicio"><img class="ks-site-brand__logo" src="/assets/images/kurosu-logo-white.svg" alt="KUROSU &amp; CÍA." width="1561" height="158"></a>
     <nav class="ks-site-footer__actions" aria-label="Accesos finales"><a href="${site.official}"${external}>Sitio oficial</a><a class="ks-footer-contact" href="${site.whatsapp}"${external}>${whatsappIcon()}<span>WhatsApp 24 hs</span></a></nav>
-  </div></div></div><div class="footer-bottom ks-site-footer__bottom"><div class="container ks-shell-container"><div class="ks-site-footer__legal"><p>Copyright © ${new Date().getFullYear()}. Todos los derechos reservados.<span class="ks-site-footer__powered"><span class="ks-site-footer__separator" aria-hidden="true">|</span> Powered by: Kurosu &amp; Cía S.A.</span></p></div></div></div></footer>`;
+  </div></div></div><div class="footer-bottom ks-site-footer__bottom"><div class="container ks-shell-container"><div class="ks-site-footer__legal"><p>Copyright © ${new Date().getFullYear()}. Todos los derechos reservados.<span class="ks-site-footer__powered"><span class="ks-site-footer__separator" aria-hidden="true">|</span> Powered by: KUROSU &amp; CÍA.</span></p></div></div></div></footer>`;
 }
 
 export function layout({ title, description, active = "", body }) {
-  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="${description}"><meta name="theme-color" content="#367c2b"><title>${title} | Kurosu &amp; Cía.</title><link rel="icon" type="image/svg+xml" href="__FAVICON__"><link rel="stylesheet" href="__SITE_CSS__"></head><body>__ICON_SPRITE__${header(active)}<main id="mainContent" tabindex="-1">${body}</main>${footer()}<script>window.KS_SEARCH_INDEX=__SEARCH_INDEX__;window.KS_ROUTE_PREFIX="__ROUTE_PREFIX__";</script><script src="__SITE_JS__"></script></body></html>`;
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="${description}"><meta name="theme-color" content="#367c2b"><title>${title} | KUROSU &amp; CÍA.</title><link rel="icon" type="image/svg+xml" href="__FAVICON__"><link rel="stylesheet" href="__SITE_CSS__"></head><body>__ICON_SPRITE__${header(active)}<main id="mainContent" tabindex="-1">${body}</main>${footer()}<script>window.KS_SEARCH_INDEX=__SEARCH_INDEX__;window.KS_ROUTE_PREFIX="__ROUTE_PREFIX__";</script><script src="__SITE_JS__"></script></body></html>`;
 }

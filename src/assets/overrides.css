@@ -35,7 +35,7 @@ body > main { flex: 1 0 auto; }
 .ks-header-search__results:not(:empty) { max-height: min(52vh, 420px); margin-top: 10px; overflow-y: auto; }
 .ks-search-result { padding: 14px; border: 1px solid var(--ks-border); border-radius: 10px; background: var(--ks-surface); box-shadow: var(--ks-shadow-sm); }
 .ks-search-result + .ks-search-result { margin-top: 10px; }
-.ks-search-result h3 { margin: 0 0 5px; font-family: "Poppins", "Segoe UI", sans-serif; font-size: 16px; font-weight: 700; line-height: 1.35; }
+.ks-search-result h3 { margin: 0 0 5px; font-family: var(--ks-font-family); font-size: 16px; font-weight: 700; line-height: 1.35; }
 .ks-search-result h3 a { color: var(--ks-green-950); }
 .ks-search-result p { margin: 0; color: var(--ks-muted); font-size: 14px; line-height: 1.5; }
 .ks-search-results .ks-search-result { margin-bottom: 12px; padding: 20px; }

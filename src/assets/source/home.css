@@ -9,7 +9,7 @@
   background: var(--ks-canvas);
   color: var(--ks-ink);
   font-size: 16px;
-  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  font-family: var(--ks-font-family);
 }
 
 .ks-home *,
@@ -113,6 +113,9 @@
   letter-spacing: -0.045em;
   line-height: 1.06;
 }
+
+.ks-home-hero__brand { width: min(540px, 100%); }
+.ks-home-hero__brand img { display: block; width: 100%; height: auto; }
 
 .ks-home-hero__tagline {
   max-width: 540px;

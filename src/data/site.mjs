@@ -1,5 +1,5 @@
 export const site = {
-  name: "Kurosu & Cía.",
+  name: "KUROSU & CÍA.",
   whatsapp: "https://wa.me/595986123000",
   official: "https://www.kurosu.com.py/index.php/",
   navigation: [
@@ -16,7 +16,7 @@ export const site = {
   actions: [
     { name: "WhatsApp 24 hs", description: "Hablá ahora con nuestro centro de atención.", href: "https://wa.me/595986123000", external: true, icon: "whatsapp" },
     { name: "Canal de WhatsApp", description: "Recibí novedades y comunicaciones oficiales.", href: "https://whatsapp.com/channel/0029VbAWgm77z4kk4LJ1MZ1o", external: true, icon: "whatsapp" },
-    { name: "Equipos y productos", description: "Encontrá información y recursos oficiales de Kurosu.", href: "/enlaces-de-productos/", icon: "grid" },
+    { name: "Equipos y productos", description: "Encontrá información y recursos oficiales de KUROSU & CÍA.", href: "/enlaces-de-productos/", icon: "grid" },
     { name: "Servicio técnico", description: "Accedé al canal de asistencia para tu maquinaria.", href: "/soporte-tecnico/", icon: "service" },
     { name: "Equipos usados", description: "Consultá las oportunidades publicadas en MachineFinder™.", href: "https://www.machinefinder.com/ww/es-PY/mf", external: true, icon: "machinefinder" },
     { name: "Promociones", description: "Conocé las oportunidades y campañas vigentes.", href: "/promociones/", icon: "tag" },
@@ -27,7 +27,7 @@ export const site = {
   products: [
     ["Tractores", "Modelos y especificaciones oficiales.", "https://www.kurosu.com.py/page/es/tractores/"],
     ["Cosechadoras", "Información oficial de cosecha.", "https://www.kurosu.com.py/page/es/cosechadoras/"],
-    ["Servicio especializado", "Recursos oficiales de servicio Kurosu.", "https://www.kurosu.com.py/page/es/repuestos-servicio/servicio-especializado-y-de-optimizaci%C3%B3n/"],
+    ["Servicio especializado", "Recursos oficiales de servicio KUROSU & CÍA.", "https://www.kurosu.com.py/page/es/repuestos-servicio/servicio-especializado-y-de-optimizaci%C3%B3n/"],
     ["Agricultura de precisión", "Soluciones oficiales de agricultura de precisión.", "https://www.kurosu.com.py/page/es/agricultura-de-precisi%C3%B3n/"]
   ],
   videos: [
