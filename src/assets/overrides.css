@@ -7,6 +7,7 @@
 .ks-page__action.ks-maintenance-link:hover { border-color: var(--ks-border); color: var(--ks-text); box-shadow: var(--ks-shadow-sm); }
 .ks-page__button.ks-maintenance-link { flex-wrap: wrap; max-width: 100%; white-space: normal; }
 .ks-page__button.ks-maintenance-link > span { min-width: 0; overflow-wrap: anywhere; }
+.ks-page__button.ks-maintenance-link:not(.ks-page__button--light) > .ks-maintenance-badge { border-color: var(--ks-green); background: var(--ks-green); color: #ffffff; }
 .ks-site-footer__actions > .ks-maintenance-link { display: inline-flex; flex-wrap: wrap; align-items: center; min-height: 44px; color: #eef6f0; font-size: 15px; font-weight: 600; }
 html { min-height: 100%; box-sizing: border-box; overflow-x: clip; background: var(--ks-bg); }
 *, *::before, *::after { box-sizing: inherit; }
