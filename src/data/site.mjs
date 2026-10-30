@@ -20,7 +20,7 @@ export const site = {
     { name: "Servicio técnico", description: "Accedé al canal de asistencia para tu maquinaria.", href: "/soporte-tecnico/", icon: "service" },
     { name: "Equipos usados", description: "Consultá las oportunidades publicadas en MachineFinder™.", href: "https://www.machinefinder.com/ww/es-PY/mf", external: true, icon: "machinefinder" },
     { name: "Promociones", description: "Conocé las oportunidades y campañas vigentes.", href: "/promociones/", icon: "tag" },
-    { name: "Trabajá con nosotros", description: "Conocé las vacantes y postulá en línea.", href: "https://postulaciones.kurosu.com.py/", external: true, icon: "careers" },
+    { name: "Trabajá con nosotros", description: "Escribinos por correo para postularte.", href: "mailto:reclutamiento@kurosu.com.py?subject=Postulaci%C3%B3n%20web", icon: "careers" },
     { name: "Contacto", description: "Dejanos tu consulta desde el portal.", href: "/contacto/", icon: "mail" },
     { name: "Sitio web oficial", description: "El sitio oficial se encuentra temporalmente en mantenimiento.", maintenance: true, icon: "official" }
   ],
