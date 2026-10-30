@@ -28,6 +28,11 @@ const html = files.filter((file) => file.endsWith(".html"));
 const assetFiles = files.filter((file) => file.includes(`${path.sep}assets${path.sep}`));
 for (const file of html) {
   const content = await readFile(file, "utf8");
+  for (const match of content.matchAll(/\bhref="([^"]+)"/g)) {
+    let url;
+    try { url = new URL(match[1]); } catch { continue; }
+    if (url.hostname === "www.kurosu.com.py") failures.push(`${file}: enlace activo al sitio en mantenimiento (${url.href})`);
+  }
   if (/\{[{%]/.test(content)) failures.push(`${file}: Liquid sin procesar`);
   if (/href=["']#["']/.test(content)) failures.push(`${file}: href=# invalido`);
   if (/spotify/i.test(content)) failures.push(`${file}: Spotify detectado`);

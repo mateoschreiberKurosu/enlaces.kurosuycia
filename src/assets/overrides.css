@@ -1,4 +1,13 @@
 /* Static shell interactions and asset-path adjustments. */
+.ks-maintenance-badge { display: inline-block; max-width: 100%; padding: 5px 9px; border: 1px solid var(--ks-yellow); border-radius: 999px; background: var(--ks-yellow); color: var(--ks-green-950); font-size: 12px; font-weight: 700; line-height: 1.2; text-align: center; text-transform: uppercase; vertical-align: middle; }
+.ks-maintenance-link { cursor: not-allowed; }
+.ks-maintenance-link > .ks-maintenance-badge { margin: 4px 0 4px 8px; }
+.ks-page__action.ks-maintenance-link { display: grid; grid-template-columns: 44px minmax(0, 1fr); }
+.ks-page__action.ks-maintenance-link > .ks-maintenance-badge { grid-column: 2; justify-self: start; margin: 0; }
+.ks-page__action.ks-maintenance-link:hover { border-color: var(--ks-border); color: var(--ks-text); box-shadow: var(--ks-shadow-sm); }
+.ks-page__button.ks-maintenance-link { flex-wrap: wrap; max-width: 100%; white-space: normal; }
+.ks-page__button.ks-maintenance-link > span { min-width: 0; overflow-wrap: anywhere; }
+.ks-site-footer__actions > .ks-maintenance-link { display: inline-flex; flex-wrap: wrap; align-items: center; min-height: 44px; color: #eef6f0; font-size: 15px; font-weight: 600; }
 html { min-height: 100%; box-sizing: border-box; overflow-x: clip; background: var(--ks-bg); }
 *, *::before, *::after { box-sizing: inherit; }
 body { display: flex; min-width: 0; min-height: 100dvh; flex-direction: column; margin: 0; overflow-x: hidden; overflow-x: clip; }

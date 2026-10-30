@@ -1,5 +1,6 @@
 import { site } from "../data/site.mjs";
 import { external, icon, whatsappIcon } from "./layout.mjs";
+import { maintenanceBadge } from "./maintenance.mjs";
 
 const actionIcon = (name) => {
   const images = { careers: "kurosu-hub-careers.jpg", machinefinder: "kurosu-hub-machinefinder.jpg", official: "kurosu-hub-official.jpg" };
@@ -14,7 +15,7 @@ export function home() {
     const cardClass = `ks-action-card${index < 2 ? " ks-action-card--priority" : ""}${item.maintenance ? " ks-action-card--maintenance" : ""}`;
     const content = `<span class="ks-action-card__visual">${actionIcon(item.icon)}</span><span class="ks-action-card__copy"><strong>${item.name}</strong><small>${item.description}</small></span>`;
     return item.maintenance
-      ? `<div class="${cardClass}" role="status" aria-label="Sitio web oficial temporalmente en mantenimiento">${content}<span class="ks-action-card__maintenance">En mantenimiento</span></div>`
+      ? `<div class="${cardClass}" role="status" aria-label="Sitio web oficial temporalmente en mantenimiento">${content}<span class="ks-action-card__maintenance">${maintenanceBadge}</span></div>`
       : `<a class="${cardClass}" href="${item.href}"${item.external ? external : ""}>${content}<span class="ks-action-card__arrow" aria-hidden="true">→</span></a>`;
   }).join("");
   const social = site.social.map(([name, href, id]) => `<a class="ks-social__link" href="${href}"${external} aria-label="${name}">${icon(id)}</a>`).join("");

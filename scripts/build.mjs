@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { layout } from "../src/templates/layout.mjs";
 import * as pages from "../src/templates/pages.mjs";
+import { disableOfficialSiteLinks } from "../src/templates/maintenance.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -80,7 +81,7 @@ const siteJs = await writeAsset("js", "site.js", await readFile(path.join(root, 
 
 const searchIndex = routes.filter(([route]) => route !== "404.html").map(([route, page]) => ({ title: page.title, description: page.description, url: route === "index.html" ? "/" : `/${route.replace(/index\.html$/, "")}` }));
 for (const [route, page] of routes) {
-  let html = layout(page);
+  let html = disableOfficialSiteLinks(layout(page));
   for (const [name, assetPath] of Object.entries(assetPaths)) html = html.replaceAll(`/assets/images/${name}`, `/${assetPath}`);
   html = html.replaceAll("__ICON_SPRITE__", iconSprite).replaceAll("__FAVICON__", `/${favicon}`).replaceAll("__SITE_CSS__", `/${siteCss}`).replaceAll("__SITE_JS__", `/${siteJs}`).replaceAll("__SEARCH_INDEX__", JSON.stringify(searchIndex)).replaceAll("__ROUTE_PREFIX__", route.includes("/") ? "../" : "./");
   await write(route, localizeRootPaths(html, route));
