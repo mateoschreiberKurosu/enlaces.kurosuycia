@@ -35,7 +35,7 @@
     --ks-green-950: #102f22;
     --ks-green-800: #1c5237;
     --ks-green-600: #347b50;
-    --ks-yellow: #e7b52d;
+    --ks-yellow: #ffde00;
     --ks-bg: #f4f7f4;
     --ks-surface: #ffffff;
     --ks-text: #19231d;
@@ -194,7 +194,7 @@ body {
 .navbar-inverse .ks-site-menu-toggle:focus {
     border-color: var(--ks-green-600);
     background: #edf5ef;
-    outline: 3px solid rgba(231, 181, 45, 0.65);
+    outline: 3px solid var(--ks-yellow);
     outline-offset: 2px;
 }
 
@@ -289,7 +289,7 @@ body {
 
 .ks-site-header .skip-to-content a:focus,
 .ks-site-header a:focus {
-    outline: 3px solid rgba(231, 181, 45, 0.8);
+    outline: 3px solid var(--ks-yellow);
     outline-offset: 2px;
 }
 
@@ -377,7 +377,7 @@ body {
 }
 
 .ks-site-footer a:focus {
-    outline: 3px solid rgba(231, 181, 45, 0.8);
+    outline: 3px solid var(--ks-yellow);
     outline-offset: 3px;
 }
 
@@ -541,7 +541,7 @@ body {
     text-decoration: none;
 }
 .ks-page__button:hover,
-.ks-page__button:focus { background: #f4c435; color: var(--ks-green-950); text-decoration: none; }
+.ks-page__button:focus { background: var(--ks-yellow); color: var(--ks-green-950); text-decoration: none; }
 .ks-page__button--light { border-color: rgba(255, 255, 255, .6); background: transparent; color: #ffffff; }
 .ks-page__button--light:hover,
 .ks-page__button--light:focus { background: #ffffff; color: var(--ks-green-950); }
