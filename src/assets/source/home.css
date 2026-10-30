@@ -1,16 +1,8 @@
 .ks-home {
-  --ks-green-950: #0b2d1c;
-  --ks-green-900: #123c25;
-  --ks-green-800: #185331;
-  --ks-green-700: #247044;
-  --ks-green-100: #e4f0e7;
-  --ks-ink: #17231b;
-  --ks-muted: #46584d;
-  --ks-canvas: #f1f5f2;
-  --ks-surface: #ffffff;
-  --ks-border: #d8e2da;
-  --ks-shadow: 0 16px 44px rgba(11, 45, 28, 0.12);
-  --ks-shadow-soft: 0 8px 24px rgba(11, 45, 28, 0.08);
+  --ks-ink: var(--ks-text);
+  --ks-canvas: var(--ks-bg);
+  --ks-shadow: 0 16px 44px rgba(16, 37, 13, 0.12);
+  --ks-shadow-soft: 0 8px 24px rgba(16, 37, 13, 0.08);
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -64,8 +56,8 @@
 .ks-home-hero__shade {
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(7, 27, 17, 0.24) 0%, rgba(7, 27, 17, 0.5) 42%, rgba(7, 27, 17, 0.94) 100%),
-    linear-gradient(90deg, rgba(9, 45, 27, 0.24), transparent 65%);
+    linear-gradient(180deg, rgba(16, 37, 13, 0.5) 0%, rgba(16, 37, 13, 0.72) 42%, rgba(16, 37, 13, 0.96) 100%),
+    linear-gradient(90deg, rgba(27, 62, 22, 0.24), transparent 65%);
 }
 
 .ks-home-hero__content {
@@ -97,7 +89,7 @@
   padding: 5px 11px;
   border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 999px;
-  background: rgba(5, 27, 16, 0.38);
+  background: var(--ks-green-900);
   color: rgba(255, 255, 255, 0.92);
   font-size: 13px;
   font-weight: 600;
@@ -147,7 +139,7 @@
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.36);
   border-radius: 50%;
-  background: rgba(6, 31, 18, 0.5);
+  background: var(--ks-green-900);
   color: #fff;
   font-size: 20px;
   transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
@@ -225,13 +217,13 @@
   border: 1px solid var(--ks-border);
   border-radius: 17px;
   background: var(--ks-surface);
-  box-shadow: 0 2px 0 rgba(11, 45, 28, 0.02);
+  box-shadow: 0 2px 0 rgba(16, 37, 13, 0.02);
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
 .ks-action-card:hover,
 .ks-action-card:focus {
-  border-color: rgba(36, 112, 68, 0.48);
+  border-color: var(--ks-green);
   box-shadow: var(--ks-shadow-soft);
   color: var(--ks-ink);
   transform: translateY(-2px);
@@ -239,14 +231,14 @@
 
 .ks-action-card--priority {
   border-color: transparent;
-  background: var(--ks-green-900);
+  background: var(--ks-green);
   color: #fff;
 }
 
 .ks-action-card--priority:hover,
 .ks-action-card--priority:focus {
   border-color: var(--ks-yellow);
-  background: var(--ks-green-800);
+  background: var(--ks-green-700);
   color: #fff;
 }
 
@@ -298,7 +290,7 @@
 }
 
 .ks-action-card--priority .ks-action-card__copy strong { color: #ffffff; }
-.ks-action-card--priority .ks-action-card__copy small { color: #dcebe1; }
+.ks-action-card--priority .ks-action-card__copy small { color: #ffffff; }
 .ks-action-card__arrow {
   color: var(--ks-green-700);
   font-size: 22px;
@@ -316,7 +308,7 @@
 
 .ks-action-card--maintenance:hover {
   border-color: var(--ks-border);
-  box-shadow: 0 2px 0 rgba(11, 45, 28, 0.02);
+  box-shadow: 0 2px 0 rgba(16, 37, 13, 0.02);
   transform: none;
 }
 
@@ -348,7 +340,7 @@
   position: relative;
   display: block;
   overflow: hidden;
-  background: #0c1710;
+  background: var(--ks-green-950);
   aspect-ratio: 16 / 9;
 }
 
@@ -377,7 +369,7 @@
 .ks-video-card__player::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 45%, rgba(4, 18, 10, 0.42));
+  background: linear-gradient(180deg, transparent 45%, rgba(16, 37, 13, 0.42));
   content: "";
   pointer-events: none;
 }

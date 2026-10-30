@@ -72,7 +72,7 @@ const assetPaths = Object.fromEntries(await Promise.all([
 ]));
 
 const markData = await readFile(path.join(sourceAssets, "kurosu-k-mark.png"));
-const favicon = await writeAsset("images", "favicon.svg", Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#102f22"/><image href="data:image/png;base64,${markData.toString("base64")}" x="10" y="10" width="44" height="44" preserveAspectRatio="xMidYMid meet"/></svg>`));
+const favicon = await writeAsset("images", "favicon.svg", Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#367c2b"/><image href="data:image/png;base64,${markData.toString("base64")}" x="10" y="10" width="44" height="44" preserveAspectRatio="xMidYMid meet"/></svg>`));
 
 let styles = `${await readFile(path.join(sourceAssets, "bootstrap.min.css"), "utf8")}\n${await readFile(path.join(sourceAssets, "kurosu-ui.css"), "utf8")}\n${await readFile(path.join(sourceAssets, "home.css"), "utf8")}\n${await readFile(path.join(root, "src", "assets", "overrides.css"), "utf8")}\n`;
 for (const name of fontNames) styles = styles.replaceAll(`url("/${name}")`, `url("../fonts/${path.basename(assetPaths[name])}")`);
