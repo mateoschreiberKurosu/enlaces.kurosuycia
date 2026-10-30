@@ -22,7 +22,7 @@ export const site = {
     { name: "Promociones", description: "Conocé las oportunidades y campañas vigentes.", href: "/promociones/", icon: "tag" },
     { name: "Trabajá con nosotros", description: "Conocé las vacantes y postulá en línea.", href: "https://postulaciones.kurosu.com.py/", external: true, icon: "careers" },
     { name: "Contacto", description: "Dejanos tu consulta desde el portal.", href: "/contacto/", icon: "mail" },
-    { name: "Sitio web oficial", description: "Visitá el sitio institucional de Kurosu & Cía.", href: "https://www.kurosu.com.py/index.php/", external: true, icon: "official" }
+    { name: "Sitio web oficial", description: "El sitio oficial se encuentra temporalmente en mantenimiento.", maintenance: true, icon: "official" }
   ],
   products: [
     ["Tractores", "Modelos y especificaciones oficiales.", "https://www.kurosu.com.py/page/es/tractores/"],
